@@ -36,6 +36,7 @@ import BlogDetails from "./pages/BlogDetails";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import Map from "./pages/Map";
 
 function App() {
   // This code will run when i will go to item details page. it will scroll me to template top. And when i back to the previous page it will redirect me to the exact previous position.
@@ -100,6 +101,7 @@ function App() {
             <Route path="/blog/:title" element={<BlogDetails />} />
 
             <Route path="/contact" element={<Contact />} />
+            <Route path="/map" element={<Map />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Wrapper>
