@@ -174,7 +174,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
                   <div className="amenities-content__inner">
                     <span className="amenities-content__text">depozito</span>
                     <h6 className="amenities-content__title mb-0 font-16">
-                      {formatCurrency(PropertiesData?.depozito)}
+                      {formatCurrency(
+                        PropertiesData?.depozito ? PropertiesData?.depozito : 0
+                      )}
                     </h6>
                   </div>
                 </div>

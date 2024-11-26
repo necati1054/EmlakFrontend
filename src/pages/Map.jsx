@@ -21,11 +21,12 @@ const Map = () => {
   const API_KEY = "AIzaSyCZ2lv_291yFguiqfick2M6d_jatFdjFNs";
 
   const [properties, setProperties] = useState([]);
-  const [selectedProperty, setSelectedProperty] = useState(null); // Seçilen Marker'ı takip etmek için
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [tip, setTip] = useState("konut");
 
   const mapContainerStyle = {
     width: "100%",
-    height: "800px",
+    height: "680px",
   };
 
   const defaultCenter = {
@@ -47,12 +48,12 @@ const Map = () => {
   const propertyURL = slugURL({
     url: "property",
     id: selectedProperty?.id,
-    ilanType: "konut",
+    ilanType: tip == "konut" ? 1 : tip.isyeri == "isyeri" ? 2 : "arsa",
   });
 
   useEffect(() => {
     axios
-      .get("konut")
+      .get(tip)
       .then((res) => {
         console.log(res.data);
         setProperties(res.data);
@@ -60,7 +61,7 @@ const Map = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [tip]);
   return (
     <>
       <PageTitle title="CityScape - Map" />
@@ -83,6 +84,35 @@ const Map = () => {
           offCanvasBtnClass=""
           showContactNumber={false}
         />
+
+        <div className="row mb-4">
+          <div className="col-sm-4">
+            <label htmlFor="tip" className="form-label">
+              Tip Seç
+            </label>
+            <select
+              className="select common-input"
+              id="tip"
+              onChange={(e) => {
+                setTip(e.target.value);
+              }}
+              value={tip}
+            >
+              <option value="konut" defaultChecked>
+                Konut
+              </option>
+              <option value="arsa">Arsa</option>
+              <option value="isyeri">iş Yeri</option>
+            </select>
+          </div>
+          <div className="col-sm-4 mt-4">
+            <p className="account-alert">
+              <strong className="text-heading fw-500 text-poppins">
+                {tip}'türünde {properties.length} tane veri getirildi
+              </strong>{" "}
+            </p>
+          </div>
+        </div>
 
         <LoadScript googleMapsApiKey={API_KEY}>
           <GoogleMap
@@ -167,7 +197,6 @@ const Map = () => {
                   >
                     İlanı Gör
                     <span className="icon-right">
-                      {" "}
                       <i className="fas fa-arrow-right"></i>{" "}
                     </span>
                   </Link>

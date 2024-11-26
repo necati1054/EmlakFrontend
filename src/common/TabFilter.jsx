@@ -2,6 +2,7 @@ import React from "react";
 
 import Filter from "../common/Filter";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Link } from "react-router-dom";
 // import { filterTabs } from "../data/HomeOneData/HomeOneData";
 
 const filterTabs = [
@@ -29,6 +30,9 @@ const TabFilter = (props) => {
               {filterTab.text}
             </Tab>
           ))}
+          <Link to="/map">
+            <Tab className={"nav-link"}>Harita İle Ara</Tab>
+          </Link>
         </TabList>
         {filterTabs.map((filterTab, index) => (
           <TabPanel key={index}>
