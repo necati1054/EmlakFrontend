@@ -1,9 +1,5 @@
 import React from "react";
-import SidebarCategoryList from "./SidebarCategoryList";
-import SidebarRecentPost from "./SidebarRecentPost";
-import SidebarProperty from "./SidebarProperty";
-import { sidebarTags } from "../data/OthersPageData/OthersPageData";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CommonSidebar = ({ user, PropertiesData }) => {
   function formatDateToDayMonthYear(dateString) {
@@ -28,10 +24,12 @@ const CommonSidebar = ({ user, PropertiesData }) => {
       currency: "TRY",
     });
   }
+
+  const { t } = useTranslation();
   return (
     <>
       <div className="common-sidebar">
-        <h6 className="common-sidebar__title"> Satıcı Bilgileri </h6>
+        <h6 className="common-sidebar__title"> {t("Satıcı Bilgileri")} </h6>
         <div
           style={{
             maxWidth: "400px",
@@ -45,7 +43,7 @@ const CommonSidebar = ({ user, PropertiesData }) => {
           <ul style={{ listStyleType: "none", padding: 0 }}>
             <li style={{ marginBottom: "15px" }}>
               <span style={{ fontWeight: "bold", color: "#555" }}>
-                İsim Soyisim:
+                {t("İsim Soyisim")}:
               </span>
               <span style={{ color: "#333", marginLeft: "5px" }}>
                 {user?.name} {user?.surname}
@@ -53,7 +51,7 @@ const CommonSidebar = ({ user, PropertiesData }) => {
             </li>
             <li style={{ marginBottom: "15px" }}>
               <span style={{ fontWeight: "bold", color: "#555" }}>
-                Telefon Numarası:
+                {t("Telefon Numarası")}:
               </span>
               <span style={{ color: "#333", marginLeft: "5px" }}>
                 {user?.phone_number}
@@ -64,14 +62,16 @@ const CommonSidebar = ({ user, PropertiesData }) => {
       </div>
       <div className="property-details-wrapper">
         <div className="property-details-item">
-          <h6 className="property-details-item__title">Bilgiler</h6>
+          <h6 className="property-details-item__title">{t("Bilgiler")}</h6>
           <div className="property-details-item__content">
             <div className="row gy-4 gy-lg-5">
               {/* start */}
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">Teklif Tipi</span>
+                    <span className="amenities-content__text">
+                      {t("Teklif Tipi")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.teklif_tipi}
                     </h6>
@@ -81,7 +81,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">İlan Tarihi</span>
+                    <span className="amenities-content__text">
+                      {t("İlan Tarihi")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {formatDateToDayMonthYear(PropertiesData?.created_at)}
                     </h6>
@@ -92,7 +94,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">imar durumu</span>
+                    <span className="amenities-content__text">
+                      {t("imar Durumu")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.imar_durumu}
                     </h6>
@@ -102,7 +106,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">fiyat</span>
+                    <span className="amenities-content__text">
+                      {t("Fiyat")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {formatCurrency(PropertiesData?.fiyat)}
                     </h6>
@@ -112,7 +118,7 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">m2</span>
+                    <span className="amenities-content__text">{t("M2")}</span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.m2}
                     </h6>
@@ -122,7 +128,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">ada no</span>
+                    <span className="amenities-content__text">
+                      {t("Ada No")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.ada_no}
                     </h6>
@@ -132,7 +140,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">Parsel No</span>
+                    <span className="amenities-content__text">
+                      {t("Parsel No")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.parsel_no}
                     </h6>
@@ -142,7 +152,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">Pafta No</span>
+                    <span className="amenities-content__text">
+                      {t("Pafta No")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.pafta_no}
                     </h6>
@@ -152,7 +164,7 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">Kaks</span>
+                    <span className="amenities-content__text">{t("Kaks")}</span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.kaks}
                     </h6>
@@ -162,7 +174,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">gabari</span>
+                    <span className="amenities-content__text">
+                      {t("Gabari")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.gabari}
                     </h6>
@@ -172,7 +186,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">depozito</span>
+                    <span className="amenities-content__text">
+                      {t("Depozito")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {formatCurrency(
                         PropertiesData?.depozito ? PropertiesData?.depozito : 0
@@ -184,7 +200,9 @@ const CommonSidebar = ({ user, PropertiesData }) => {
               <div className="col-sm-6 col-6">
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
-                    <span className="amenities-content__text">tapu durumu</span>
+                    <span className="amenities-content__text">
+                      {t("Tapu Durumu")}
+                    </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.tapu_durumu}
                     </h6>
@@ -195,7 +213,7 @@ const CommonSidebar = ({ user, PropertiesData }) => {
                 <div className="amenities-content d-flex align-items-center">
                   <div className="amenities-content__inner">
                     <span className="amenities-content__text">
-                      taşınmaz numarası
+                      {t("Taşınmaz Numarası")}
                     </span>
                     <h6 className="amenities-content__title mb-0 font-16">
                       {PropertiesData?.taşınmaz_numarası}

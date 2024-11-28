@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-
+import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 import { türkiyeIlleri } from "../data/OthersPageData/OthersPageData";
-import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const konut_taşınmaz_türü = [
   { id: 1, text: "daire" },
@@ -59,6 +57,7 @@ const arsa_taşınmaz_türü = [
 ];
 
 const Filter = (props) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // Input Field Validation Start
@@ -73,8 +72,8 @@ const Filter = (props) => {
     validationSchema: yup.object({
       ilan_basligi: yup
         .string()
-        .min(3, "Minimum 3 karakter girmelisiniz")
-        .required("Arama kelimesi girmelisiniz"),
+        .min(3, t("Minimum 3 karakter girmelisiniz"))
+        .required(t("Arama kelimesi girmelisiniz")),
     }),
 
     onSubmit: (values, { resetForm }) => {
@@ -125,7 +124,7 @@ const Filter = (props) => {
             <div className={props.colClass}>
               <input
                 type="text"
-                placeholder="Kelime veya cümle giriniz"
+                placeholder={t("Kelime veya cümle giriniz")}
                 name="ilan_basligi"
                 id="ilan_basligi"
                 onChange={formik.handleChange}
@@ -208,7 +207,7 @@ const Filter = (props) => {
             </div>
             <div className={props.colClass}>
               <button type="submit" className="btn btn-main w-100">
-                Ara
+                {t("Ara")}
               </button>
             </div>
           </div>

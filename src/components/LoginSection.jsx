@@ -6,8 +6,10 @@ import { ToastContainer, toast } from "react-toastify";
 import LoginRegisterThumb from "../../public/assets/images/thumbs/login-img.avif";
 import axios from "../axios.js";
 import { jwtDecode } from "jwt-decode";
+import { useTranslation } from "react-i18next";
 
 const LoginSection = () => {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -39,9 +41,9 @@ const LoginSection = () => {
     validationSchema: yup.object({
       email: yup
         .string()
-        .email("E-postanız geçerli değil! Geçerli e-posta sağlayın")
-        .required("E-Posta Gereklidir"),
-      password: yup.string().required("Şifre Gereklidir"),
+        .email(t("E-postanız geçerli değil! Geçerli e-posta sağlayın"))
+        .required(t("E-Posta Gereklidir")),
+      password: yup.string().required(t("Şifre Gereklidir")),
     }),
 
     onSubmit: (values, { resetForm }) => {
@@ -52,13 +54,13 @@ const LoginSection = () => {
           setSession(res.data.access_token);
           navigate("/account");
           resetForm({ values: "" });
-          toast.success("Giriş Başarılı", {
+          toast.success(t("Giriş Başarılı"), {
             theme: "colored",
           });
           console.log("You Logged in SUccessfully");
         })
         .catch((err) => {
-          toast.error("Giriş Başarısız", {
+          toast.error(t("Giriş Başarısız"), {
             theme: "colored",
           });
           console.log("You Logged in Failed");
@@ -96,16 +98,16 @@ const LoginSection = () => {
                   <div className="loginRegister-content">
                     <form onSubmit={formik.handleSubmit} method="POST">
                       <h3 className="loginRegister__title text-poppins">
-                        Emlak Giriş yap
+                        CitySpace {t("Giriş Yap")}
                       </h3>
                       <div className="row gy-lg-4 gy-3">
                         <div className="col-sm-12 col-xs-6">
                           <label htmlFor="Email" className="form-label">
-                            E-Posta
+                            {t("E-Posta")}
                           </label>
                           <input
                             type="email"
-                            placeholder="E-Posta"
+                            placeholder={t("E-Posta")}
                             name="email"
                             id="Email"
                             onChange={formik.handleChange}
@@ -121,12 +123,12 @@ const LoginSection = () => {
                         </div>
                         <div className="col-sm-12">
                           <label htmlFor="your-password" className="form-label">
-                            Şifre
+                            {t("Şifre")}
                           </label>
                           <div className="position-relative">
                             <input
                               type={`${showPassword ? "text" : "password"}`}
-                              placeholder="Şifre"
+                              placeholder={t("Şifre")}
                               name="password"
                               id="your-password"
                               onChange={formik.handleChange}
@@ -159,14 +161,14 @@ const LoginSection = () => {
                               to="#"
                               className="forgot-password text-decoration-underline text-main text-poppins font-14"
                             >
-                              Şifreni Sıfırla?
+                              {t("Şifreni Sıfırla")}?
                             </Link>
                           </div>
                         </div>
 
                         <div className="col-12">
                           <button type="submit" className="btn btn-main w-100">
-                            Giriş Yap
+                            {t("Giriş Yap")}
                             <span className="icon-right">
                               <i className="far fa-paper-plane"></i>{" "}
                             </span>
@@ -176,13 +178,13 @@ const LoginSection = () => {
                         <div className="col-sm-12 mb-0">
                           <div className="have-account text-center">
                             <p className="text">
-                              Hesabınız Yok mu?{" "}
+                              {t("Hesabınız Yok Mu")}?{" "}
                               <Link
                                 to="/register"
                                 className="link text-main text-decoration-underline font-14 text-poppins"
                               >
                                 {" "}
-                                Kayıt Ol
+                                {t("Kayıt Ol")}
                               </Link>
                             </p>
                           </div>

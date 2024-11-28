@@ -4,9 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "../axios.js";
-
 import LoginRegisterThumb from "../../public/assets/images/thumbs/login-img.avif";
-import { render } from "react-dom";
+import { useTranslation } from "react-i18next";
 
 const LoginRegister = ({
   titleText,
@@ -23,6 +22,7 @@ const LoginRegister = ({
   haveAccountLink,
   haveAccountLinkText,
 }) => {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -48,17 +48,17 @@ const LoginRegister = ({
       surname: "",
     },
     validationSchema: Yup.object({
-      phone_number: Yup.string().required("Telefon Numarası Zorunlu"),
+      phone_number: Yup.string().required(t("Telefon Numarası Zorunlu")),
       email: Yup.string()
-        .email("Geçerli Bir Email Giriniz")
-        .required("Email Zorunlu"),
-      name: Yup.string().required("İsim Zorunlu"),
-      surname: Yup.string().required("Soyisim Zorunlu"),
-      role: Yup.string().required("Role Zorunlu"),
-      password: Yup.string().required("Şifre Zorunlu"),
+        .email(t("Geçerli Bir Email Giriniz"))
+        .required(t("Email Zorunlu")),
+      name: Yup.string().required(t("İsim Zorunlu")),
+      surname: Yup.string().required(t("Soyisim Zorunlu")),
+      role: Yup.string().required(t("Role Zorunlu")),
+      password: Yup.string().required(t("Şifre Zorunlu")),
       confirm: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Şifreler Eşleşmiyor")
-        .required("Şifre Tekrarı Zorunlu"),
+        .oneOf([Yup.ref("password"), null], t("Şifreler Eşleşmiyor"))
+        .required(t("Şifre Tekrarı Zorunlu")),
     }),
     onSubmit: (values, { resetForm }) => {
       console.log(values);
@@ -68,7 +68,7 @@ const LoginRegister = ({
         .then((res) => {
           console.log(res);
           resetForm({ values: "" });
-          toast.success("Başarılı! Başarılı bir şekilde kayıt oldunuz.", {
+          toast.success(t("Başarılı! Başarılı bir şekilde kayıt oldunuz."), {
             theme: "colored",
           });
           console.log("You Logged in SUccessfully");
@@ -77,7 +77,7 @@ const LoginRegister = ({
         .catch((err) => {
           console.log(err);
 
-          toast.error("Hata! Lütfen daha sonra tekrar deneyiniz.", {
+          toast.error(t("Hata! Lütfen daha sonra tekrar deneyiniz."), {
             theme: "colored",
           });
         });
@@ -134,12 +134,10 @@ const LoginRegister = ({
                       </h3>
                       <div className="row gy-lg-4 gy-3">
                         <div className={firstNameCol}>
-                          <label htmlFor="name" className="form-label">
-                            İsim
-                          </label>
+                          <label htmlFor="name" className="form-label"></label>
                           <input
                             type="text"
-                            placeholder="İsim"
+                            placeholder={t("İsim")}
                             name="name"
                             id="name"
                             onChange={formik.handleChange}
@@ -156,11 +154,11 @@ const LoginRegister = ({
 
                         <div className={lastNameCol}>
                           <label htmlFor="surname" className="form-label">
-                            Soyisim
+                            {t("Soyisim")}
                           </label>
                           <input
                             type="text"
-                            placeholder="Soyisim"
+                            placeholder={t("Soyisim")}
                             name="surname"
                             id="surname"
                             onChange={formik.handleChange}
@@ -177,11 +175,11 @@ const LoginRegister = ({
 
                         <div className="col-sm-6 col-xs-6">
                           <label htmlFor="email" className="form-label">
-                            email
+                            {t("E-Posta")}
                           </label>
                           <input
                             type="email"
-                            placeholder="email"
+                            placeholder={t("E-Posta")}
                             name="email"
                             id="email"
                             onChange={formik.handleChange}
@@ -197,11 +195,11 @@ const LoginRegister = ({
                         </div>
                         <div className="col-sm-6 col-xs-6">
                           <label htmlFor="phone_number" className="form-label">
-                            Telefon Numarası
+                            {t("Telefon Numarası")}
                           </label>
                           <input
                             type="text"
-                            placeholder="Telefon Numarası"
+                            placeholder={t("Telefon Numarası")}
                             name="phone_number"
                             id="phone_number"
                             onChange={formik.handleChange}
@@ -218,11 +216,11 @@ const LoginRegister = ({
                         </div>
                         <div className="col-sm-6 col-xs-6">
                           <label htmlFor="role" className="form-label">
-                            role
+                            {t("Role")}
                           </label>
                           <input
                             type="text"
-                            placeholder="role"
+                            placeholder={t("Role")}
                             name="role"
                             id="role"
                             onChange={formik.handleChange}
@@ -239,12 +237,12 @@ const LoginRegister = ({
 
                         <div className={passwordCol}>
                           <label htmlFor="your-password" className="form-label">
-                            Şifre
+                            {t("Şifre")}
                           </label>
                           <div className="position-relative">
                             <input
                               type={`${showPassword ? "text" : "password"}`}
-                              placeholder="Şifre"
+                              placeholder={t("Şifre")}
                               name="password"
                               id="your-password"
                               onChange={formik.handleChange}
@@ -273,14 +271,14 @@ const LoginRegister = ({
                         {showConfirm && (
                           <div className="col-sm-6 col-xs-6">
                             <label htmlFor="confirm" className="form-label">
-                              Şifre Yeniden
+                              {t("Şifre Yeniden")}
                             </label>
                             <div className="position-relative">
                               <input
                                 type={`${
                                   showConfirmPassword ? "text" : "password"
                                 }`}
-                                placeholder="Şifre Yeniden"
+                                placeholder={t("Şifre Yeniden")}
                                 name="confirm"
                                 id="confirm"
                                 onChange={formik.handleChange}
@@ -315,7 +313,7 @@ const LoginRegister = ({
                                 to="#"
                                 className="forgot-password text-decoration-underline text-main text-poppins font-14"
                               >
-                                Şifreni Sıfırla?
+                                {t("Şifreni Sıfırla")}?
                               </Link>
                             </div>
                           </div>

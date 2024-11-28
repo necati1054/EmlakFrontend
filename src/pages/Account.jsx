@@ -1,18 +1,17 @@
 import React from "react";
 import Header from "../common/Header";
 import FooterTwo from "../common/FooterTwo";
-import Breadcrumb from "../common/Breadcrumb";
-import Cta from "../components/Cta";
 import AccountSection from "../components/AccountSection";
 import PageTitle from "../common/PageTitle";
+import { useTranslation } from "react-i18next";
 
 const Account = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <PageTitle title="CityScape - Account Page" />
+      <PageTitle title={`CityScape - ${t("Hesap")}`} />
 
       <main className="body-bg">
-        {/* Header */}
         <Header
           headerClass="dark-header has-border"
           logoBlack={false}
@@ -27,20 +26,8 @@ const Account = () => {
           offCanvasBtnClass=""
           showContactNumber={false}
         />
-
-        {/* BreadCrumb */}
-        {/* <Breadcrumb 
-                pageTitle="Account"
-                pageName="Account"
-            /> */}
-
-        {/* Account Section */}
         <AccountSection />
 
-        {/* Cta */}
-        {/* <Cta ctaClass="" /> */}
-
-        {/* Footer */}
         <FooterTwo />
       </main>
     </>

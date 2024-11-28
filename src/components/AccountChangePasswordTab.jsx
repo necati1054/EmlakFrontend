@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "../axios.js";
 import * as Yup from "yup";
+import { useTranslation } from "react-i18next";
 
 const AccountChangePasswordTab = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userData = JSON.parse(storedUser);
@@ -46,11 +48,11 @@ const AccountChangePasswordTab = () => {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      oldPassword: Yup.string().required("Şimdiki Şifre Zorunlu"),
-      newPassword: Yup.string().required("Yeni Şifre Zorunlu"),
+      oldPassword: Yup.string().required(t("Şimdiki Şifre Zorunlu")),
+      newPassword: Yup.string().required(t("Yeni Şifre Zorunlu")),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("newPassword"), null], "Şifreler Eşleşmiyor")
-        .required("Yeni Şifre Tekrarı Zorunlu"),
+        .oneOf([Yup.ref("newPassword"), null], t("Şifreler Eşleşmiyor"))
+        .required(t("Yeni Şifre Tekrarı Zorunlu")),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -71,19 +73,19 @@ const AccountChangePasswordTab = () => {
         <div className="card common-card">
           <div className="card-body">
             <h6 className="loginRegister__title text-poppins">
-              Şifre Değiştir
+              {t("Şifre Değiştir")}
             </h6>
 
             <div className="row gy-lg-4 gy-3">
               <div className="col-12">
                 <label htmlFor="oldPassword" className="form-label">
-                  Şimdiki Şifreniz
+                  {t("Şimdiki Şifreniz")}
                 </label>
                 <div className="position-relative">
                   <input
                     type="password"
                     className="common-input"
-                    placeholder="Password"
+                    placeholder={t("Şimdiki Şifreniz")}
                     id="oldPassword"
                     value={formik.values.oldPassword}
                     onChange={formik.handleChange}
@@ -102,13 +104,13 @@ const AccountChangePasswordTab = () => {
               </div>
               <div className="col-12">
                 <label htmlFor="newPassword" className="form-label">
-                  Yeni Şifreniz
+                  {t("Yeni Şifreniz")}
                 </label>
                 <div className="position-relative">
                   <input
                     type="password"
                     className="common-input"
-                    placeholder="Password"
+                    placeholder={t("Yeni Şifreniz")}
                     id="newPassword"
                     value={formik.values.newPassword}
                     onChange={formik.handleChange}
@@ -125,13 +127,13 @@ const AccountChangePasswordTab = () => {
               </div>
               <div className="col-12">
                 <label htmlFor="confirmPassword" className="form-label">
-                  Yeni Şifrenizi Onaylayın
+                  {t("Yeni Şifrenizi Onaylayın")}
                 </label>
                 <div className="position-relative">
                   <input
                     type="password"
                     className="common-input"
-                    placeholder="Password"
+                    placeholder={t("Yeni Şifrenizi Onaylayın")}
                     id="confirmPassword"
                     value={formik.values.confirmPassword}
                     onChange={formik.handleChange}
@@ -151,7 +153,7 @@ const AccountChangePasswordTab = () => {
               </div>
               <div className="col-12">
                 <button type="submit" className="btn btn-main w-100">
-                  Şifreyi Değiştir
+                  {t("Şifreyi Değiştir")}
                 </button>
               </div>
             </div>

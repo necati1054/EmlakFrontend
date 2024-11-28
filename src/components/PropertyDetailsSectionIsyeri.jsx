@@ -1,11 +1,11 @@
 import React from "react";
-
 import CommonSidebar from "../common/CommonSidebarIsyeri";
 import HouseLocationMap from "./HouseLocationMap";
-
 import Config from "../urlConf.js";
+import { useTranslation } from "react-i18next";
 
 const PropertyDetailsSection = ({ PropertiesData }) => {
+  const { t } = useTranslation();
   return (
     <>
       {/* ============================ Property Details Section Start =============== */}
@@ -34,10 +34,11 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
               <p className="property-details__desc">
                 {PropertiesData?.açıklama?.slice(179, 400)}
               </p>
-
               <div className="property-details-wrapper">
                 <div className="property-details-item">
-                  <h6 className="property-details-item__title">Ek Bilgiler</h6>
+                  <h6 className="property-details-item__title">
+                    {t("Ek Bilgiler")}
+                  </h6>
                   <div className="property-details-item__content">
                     <div className="row gy-4 gy-lg-5">
                       {/* start */}
@@ -45,7 +46,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
-                              Alkol Ruhsatı
+                              {t("Alkol Ruhsatı")}
                             </span>
                             <h6 className="amenities-content__title mb-0 font-16">
                               {PropertiesData?.alkol_ruhsatı == 1
@@ -60,7 +61,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
-                              Kiracılı
+                              {t("Kiracılı")}
                             </span>
                             <h6 className="amenities-content__title mb-0 font-16">
                               {PropertiesData?.kiracılı == 1 ? "var" : "yok"}
@@ -72,7 +73,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
-                              krediye Uygunluk
+                              {t("krediye Uygunluk")}
                             </span>
                             <h6 className="amenities-content__title mb-0 font-16">
                               {PropertiesData?.krediye_uygunluk == 1
@@ -86,7 +87,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
-                              zemin etüdü
+                              {t("Zemin Etüdü")}
                             </span>
                             <h6 className="amenities-content__title mb-0 font-16">
                               {PropertiesData?.zemin_etüdü == 1 ? "var" : "yok"}
@@ -98,7 +99,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
-                              takaslı
+                              {t("Takaslı")}
                             </span>
                             <h6 className="amenities-content__title mb-0 font-16">
                               {PropertiesData?.takaslı == 1 ? "var" : "yok"}
@@ -111,7 +112,7 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                 </div>
 
                 <div className="property-details-item">
-                  <h6 className="property-details-item__title">Address</h6>
+                  <h6 className="property-details-item__title">{t("Adres")}</h6>
                   <div className="property-details-item__content">
                     <div className="row gy-4">
                       <div className="col-6">
@@ -133,7 +134,9 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                 </div>
 
                 <div className="property-details-item">
-                  <h6 className="property-details-item__title">Fotoğraflar</h6>
+                  <h6 className="property-details-item__title">
+                    {t("Fotoğraflar")}
+                  </h6>
                   <div className="property-details-item__content">
                     <div className="row gy-4">
                       {PropertiesData?.photos?.map(

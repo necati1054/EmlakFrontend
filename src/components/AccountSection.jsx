@@ -1,20 +1,18 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { accountTabs } from "../data/OthersPageData/OthersPageData";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AccountHomeTab from "./AccountHomeTab";
 import AccountProfileTab from "./AccountProfileTab";
-import AccountAddressTab from "./AccountAddressTab";
 import AccountDetailsTab from "./AccountDetailsTab";
 import AccountMyPropertyTab from "./AccountMyPropertyTab";
-import AccountFavoritePropertyTab from "./AccountFavoritePropertyTab";
 import AccountAddPropertyTab from "./AccountAddPropertyTab";
-import AccountPaymentTab from "./AccountPaymentTab";
 import AccountChangePasswordTab from "./AccountChangePasswordTab";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const AccountSection = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const notify = () =>
@@ -39,6 +37,33 @@ const AccountSection = () => {
         navigate("/login");
       });
   };
+
+  const accountTabs = [
+    {
+      icon: <i className="fas fa-home"></i>,
+      text: t("Ana Sayfa"),
+    },
+    {
+      icon: <i className="fas fa-user"></i>,
+      text: t("Profilim"),
+    },
+    {
+      icon: <i className="fas fa-user"></i>,
+      text: t("Hesap Bilgilerim"),
+    },
+    {
+      icon: <i className="fas fa-list"></i>,
+      text: t("İlanlarım"),
+    },
+    {
+      icon: <i className="fas fa-map-marked-alt"></i>,
+      text: t("İlan Ekle"),
+    },
+    {
+      icon: <i className="fas fa-lock"></i>,
+      text: t("Şifre Değiştir"),
+    },
+  ];
 
   return (
     <>
@@ -69,7 +94,7 @@ const AccountSection = () => {
                         {" "}
                         <i className="fas fa-sign-out-alt"></i>
                       </span>
-                      Çıkış Yap
+                      {t("Çıkış Yap")}
                     </button>
                   </TabList>
                 </div>
@@ -88,15 +113,9 @@ const AccountSection = () => {
                 <TabPanel>
                   <AccountMyPropertyTab />
                 </TabPanel>
-                {/* <TabPanel>
-                  <AccountFavoritePropertyTab />
-                </TabPanel> */}
                 <TabPanel>
                   <AccountAddPropertyTab />
                 </TabPanel>
-                {/* <TabPanel>
-                  <AccountPaymentTab />
-                </TabPanel> */}
                 <TabPanel>
                   <AccountChangePasswordTab />
                 </TabPanel>

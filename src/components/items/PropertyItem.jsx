@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { PropertyFilterContext } from "../../contextApi/PropertyFilterContext";
 import { slugURL } from "../../utility/Utility";
 import Config from "../../../src/urlConf";
+import { useTranslation } from "react-i18next";
 
 const PropertyItem = ({
   property,
@@ -43,6 +44,8 @@ const PropertyItem = ({
     asansör_sayisi,
     id,
   } = property;
+
+  const { t } = useTranslation();
 
   // Details Slug
   const propertyURL = slugURL({
@@ -131,7 +134,9 @@ const PropertyItem = ({
         >
           <h6 className="property-item__price">
             {formatCurrency(fiyat)}{" "}
-            {teklif_tipi == "kiralık" && <span className="day">Aylık</span>}
+            {teklif_tipi == "kiralık" && (
+              <span className="day">{t("Aylık")}</span>
+            )}
           </h6>
           <h6 className="property-item__title">
             <Link
@@ -211,7 +216,7 @@ const PropertyItem = ({
                 state={{ thumb, title, desc, price }}
                 className={`simple-btn ${btnClass}`}
               >
-                İlanı Gör
+                {t("İlanı Gör")}
                 <span className="icon-right">
                   {" "}
                   <i className="fas fa-arrow-right"></i>{" "}
@@ -226,7 +231,7 @@ const PropertyItem = ({
               state={{ thumb, title, desc, price }}
               className={`simple-btn ${btnClass}`}
             >
-              İlanı Gör
+              {t("İlanı Gör")}
               <span className="icon-right">
                 {" "}
                 <i className="fas fa-arrow-right"></i>{" "}

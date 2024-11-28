@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import KonutListingForm from "./KonutListingForm";
 import ArsaListingForm from "./ArsaListingForm";
 import IsYeriListingForm from "./IsYeriListingForm";
+import { useTranslation } from "react-i18next";
 
 const AccountAddPropertyTab = () => {
   const [state, setState] = useState(null);
+  const { t } = useTranslation();
   return (
     <>
       {state == null && (
         <p className="account-alert">
-          Lütfen Seçim Yapınız{" "}
+          {t("Lütfen Seçim Yapınız")}{" "}
           <strong className="text-heading fw-500 text-poppins">
-            Konut / Arsa / İş Yeri
+            {t("Konut / Arsa / İş Yeri")}
           </strong>{" "}
         </p>
       )}
@@ -23,7 +25,7 @@ const AccountAddPropertyTab = () => {
             onClick={() => setState(1)}
             className="btn btn-main w-100"
           >
-            Konut
+            {t("Konut")}
           </button>
         </div>
         <div className="col-md-4">
@@ -32,7 +34,7 @@ const AccountAddPropertyTab = () => {
             onClick={() => setState(2)}
             className="btn btn-main w-100"
           >
-            Arsa
+            {t("Arsa")}
           </button>
         </div>
         <div className="col-md-4">
@@ -41,7 +43,7 @@ const AccountAddPropertyTab = () => {
             onClick={() => setState(3)}
             className="btn btn-main w-100"
           >
-            İş Yeri
+            {t("İş Yeri")}
           </button>
         </div>
       </div>

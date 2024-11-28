@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const AccountDetailsTab = () => {
   const navigate = useNavigate();
@@ -69,24 +70,26 @@ const AccountDetailsTab = () => {
     });
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
         <div className="card common-card mb-4">
           <div className="card-body">
             <h6 className="loginRegister__title text-poppins">
-              Hesap Bilgileri
+              {t("Hesap Bilgileri")}
             </h6>
 
             <div className="row gy-lg-4 gy-3">
               <div className="col-sm-6 col-xs-6">
                 <label htmlFor="name" className="form-label">
-                  İsim
+                  {t("İsim")}
                 </label>
                 <input
                   type="text"
                   className="common-input"
-                  placeholder="İsim"
+                  placeholder={t("İsim")}
                   id="name"
                   value={formik.values.name || ""}
                   onChange={formik.handleChange}
@@ -95,12 +98,12 @@ const AccountDetailsTab = () => {
               </div>
               <div className="col-sm-6 col-xs-6">
                 <label htmlFor="surname" className="form-label">
-                  Soyisim
+                  {t("Soyisim")}
                 </label>
                 <input
                   type="text"
                   className="common-input"
-                  placeholder="Last Name"
+                  placeholder={t("Soyisim")}
                   id="surname"
                   value={formik.values.surname || ""}
                   onChange={formik.handleChange}
@@ -109,12 +112,12 @@ const AccountDetailsTab = () => {
               </div>
               <div className="col-sm-6 col-xs-6">
                 <label htmlFor="phone_number" className="form-label">
-                  Telefon Numarası
+                  {t("Telefon Numarası")}
                 </label>
                 <input
                   type="text"
                   className="common-input"
-                  placeholder="Telefon Numarası"
+                  placeholder={t("Telefon Numarası")}
                   id="phone_number"
                   value={formik.values.phone_number || ""}
                   onChange={formik.handleChange}
@@ -123,12 +126,12 @@ const AccountDetailsTab = () => {
               </div>
               <div className="col-sm-6 col-xs-6">
                 <label htmlFor="Email" className="form-label">
-                  E-Posta
+                  {t("E-Posta")}
                 </label>
                 <input
                   type="email"
                   className="common-input"
-                  placeholder=" E-Posta"
+                  placeholder={t("E-Posta")}
                   id="Email"
                   value={formik.values.Email || ""}
                   onChange={formik.handleChange}
@@ -138,12 +141,12 @@ const AccountDetailsTab = () => {
               {userData.role === "0" && (
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="role" className="form-label">
-                    Role
+                    {t("Role")}
                   </label>
                   <input
                     type="text"
                     className="common-input"
-                    placeholder=" Role"
+                    placeholder={t("Role")}
                     id="role"
                     value={formik.values.role || ""}
                     onChange={formik.handleChange}
@@ -154,7 +157,7 @@ const AccountDetailsTab = () => {
             </div>
             <div className="col-12 mt-5">
               <button type="submit" className="btn btn-main w-100">
-                Kaydet
+                {t("Kaydet")}
               </button>
             </div>
           </div>

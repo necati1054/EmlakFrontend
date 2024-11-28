@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { contactTopInfos } from "../data/OthersPageData/OthersPageData";
 import { Link } from "react-router-dom";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const ContactTop = () => {
+  const { t } = useTranslation();
   const [footerData, setFooterData] = useState(null);
 
   useEffect(() => {
@@ -23,9 +24,9 @@ const ContactTop = () => {
         <div className="container container-two">
           <div className="section-heading">
             <span className="section-heading__subtitle bg-gray-100">
-              <span className="text-gradient fw-semibold">İletişim</span>
+              <span className="text-gradient fw-semibold">{t("İletişim")}</span>
             </span>
-            <h2 className="section-heading__title">İletişim!</h2>
+            <h2 className="section-heading__title">{t("İletişim")}!</h2>
           </div>
           <div className="row gy-4">
             <div className="col-lg-4 col-sm-6">
@@ -33,7 +34,7 @@ const ContactTop = () => {
                 <span className="contact-card__icon">
                   <i className="fas fa-paper-plane"></i>
                 </span>
-                <h5 className="contact-card__title">E-Posta</h5>
+                <h5 className="contact-card__title">{t("E-Posta")}</h5>
                 <p className="contact-card__text font-18">
                   <Link
                     to={`mailto: ${
@@ -44,9 +45,6 @@ const ContactTop = () => {
                     {footerData?.find((item) => item.key === "email")?.value}
                   </Link>
                 </p>
-                {/* <p className="contact-card__text font-18">
-                  {contactTopInfo.text}
-                </p> */}
               </div>
             </div>
             <div className="col-lg-4 col-sm-6">
@@ -54,17 +52,7 @@ const ContactTop = () => {
                 <span className="contact-card__icon">
                   <i className="fas fa-map-marker-alt"></i>
                 </span>
-                <h5 className="contact-card__title">address</h5>
-                {/* <p className="contact-card__text font-18">
-                  <Link
-                    to={`mailto: ${
-                      footerData?.find((item) => item.key === "email")?.value
-                    }`}
-                    className="link"
-                  >
-                    {footerData?.find((item) => item.key === "email")?.value}
-                  </Link>
-                </p> */}
+                <h5 className="contact-card__title">{t("Adres")}</h5>
                 <p className="contact-card__text font-18">
                   {footerData?.find((item) => item.key === "address")?.value}
                 </p>
@@ -75,7 +63,7 @@ const ContactTop = () => {
                 <span className="contact-card__icon">
                   <i className="fas fa-map-marker-alt"></i>
                 </span>
-                <h5 className="contact-card__title">Telefon Numarası</h5>
+                <h5 className="contact-card__title">{t("Telefon Numarası")}</h5>
                 <p className="contact-card__text font-18">
                   <Link
                     to={`tel: ${
@@ -86,9 +74,6 @@ const ContactTop = () => {
                     {footerData?.find((item) => item.key === "phone")?.value}
                   </Link>
                 </p>
-                {/* <p className="contact-card__text font-18">
-                  {footerData?.find((item) => item.key === "phone_number")?.value}
-                </p> */}
               </div>
             </div>
           </div>

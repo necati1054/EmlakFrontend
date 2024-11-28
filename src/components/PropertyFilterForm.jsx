@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { PropertyFilterContext } from "../contextApi/PropertyFilterContext";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useTranslation } from "react-i18next";
 
 const useQueryParams = () => {
   const location = useLocation();
@@ -20,14 +20,7 @@ const useQueryParams = () => {
 const PropertyFilterForm = () => {
   const queryParams = useQueryParams();
 
-  // const {
-  //   dataStatus,
-  //   handleDataStatusChange,
-  //   dataType,
-  //   handleDataTypeChange,
-  //   dataLocation,
-  //   handleDataLocationChange,
-  // } = useContext(PropertyFilterContext);
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -57,10 +50,10 @@ const PropertyFilterForm = () => {
                 // value={dataStatus}
               >
                 <option value="Status" disabled defaultValue>
-                  Status
+                  {t("Durum")}
                 </option>
-                <option value="satılık">satılık</option>
-                <option value="kiralık">kiralık</option>
+                <option value="satılık">{t("Satılık")}</option>
+                <option value="kiralık">{t("Kiralık")}</option>
               </select>
               <span className="input-icon input-icon--left text-gradient">
                 <img src="assets/images/icons/status.svg" alt="" />
@@ -76,9 +69,9 @@ const PropertyFilterForm = () => {
                 // value={dataType}
               >
                 <option value="Type" disabled defaultValue>
-                  Type
+                  {t("Tür")}
                 </option>
-                <option value="All">All</option>
+                <option value="Tür">{t("Tür")}</option>
                 <option value="Houses">Houses</option>
                 <option value="Apartments">Apartments</option>
                 <option value="Office">Office</option>
@@ -97,9 +90,9 @@ const PropertyFilterForm = () => {
                 // value={dataLocation}
               >
                 <option value="Location" disabled defaultValue>
-                  Location
+                  {t("Konum")}
                 </option>
-                <option value="All"> Country</option>
+                <option value="All">{t("Konum")}</option>
                 <option value="Bangladesh" data-location="Bangladesh">
                   Bangladesh
                 </option>
@@ -129,7 +122,7 @@ const PropertyFilterForm = () => {
               <input
                 type="text"
                 className="common-input common-input--withLeftIcon pill text-gray-800"
-                placeholder="Advanced Filter"
+                placeholder={t("Kelime veya cümle giriniz")}
               />
               <span className="input-icon input-icon--left text-gradient">
                 <img src="assets/images/icons/filter.svg" alt="" />

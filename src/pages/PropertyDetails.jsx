@@ -9,6 +9,7 @@ import PropertyDetailsSecritonArsa from "../components/PropertyDetailsSectionArs
 import { useParams } from "react-router-dom";
 import PageTitle from "../common/PageTitle";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const PropertyDetails = () => {
   const [PropertiesData, setPropertiesData] = useState();
@@ -23,9 +24,11 @@ const PropertyDetails = () => {
     getData();
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <>
-      <PageTitle title="CityScape - Property Details" />
+      <PageTitle title={`CityScape - ${t("İlan Detayları")}`} />
 
       {/* Header */}
       <Header
@@ -45,7 +48,7 @@ const PropertyDetails = () => {
 
       {/* BreadCrumb */}
       <Breadcrumb
-        pageTitle="Ürün Detayları"
+        pageTitle={t("Ürün Detayları")}
         pageName={PropertiesData?.ilan_basligi}
       />
 

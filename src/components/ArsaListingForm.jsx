@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { türkiyeIlleri } from "../data/OthersPageData/OthersPageData";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import MyComponent from "./GoogleMaps";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const defaultCenter = {
   lat: 39.9334, // Başlangıç enlem (Eğer izin verilmezse kullanılacak)
@@ -11,6 +11,7 @@ const defaultCenter = {
 };
 
 const KonutListingForm = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [provinceData, setProvinceData] = useState(null);
@@ -135,20 +136,20 @@ const KonutListingForm = () => {
         <div className="card-item" id="basicInformation">
           <div className="card common-card">
             <div className="card-header">
-              <h6 className="title mb-0">Bilgiler</h6>
+              <h6 className="title mb-0">{t("Bilgiler")}</h6>
             </div>
             <div className="card-body">
               <div className="row gy-4">
                 <div className="col-sm-12">
                   <label htmlFor="ilan_basligi" className="form-label">
-                    İlan Başlığı
+                    {t("İlan Başlığı")}
                   </label>
                   <input
                     type="text"
                     className="common-input"
                     id="ilan_basligi"
                     name="ilan_basligi"
-                    placeholder="İlan Başlığı"
+                    placeholder={t("İlan Başlığı")}
                     value={formik.values.ilan_basligi}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -156,12 +157,12 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-12">
                   <label htmlFor="açıklama" className="form-label">
-                    Açıklama
+                    {t("Açıklama")}
                   </label>
                   <textarea
                     className="common-input"
                     id="açıklama"
-                    placeholder="Açıklama"
+                    placeholder={t("Açıklama")}
                     value={formik.values.açıklama}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -169,7 +170,7 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="teklif_tipi" className="form-label">
-                    Tekif Tipi
+                    {t("Tekif Tipi")}
                   </label>
                   <div className="select-has-icon icon-black">
                     <select
@@ -179,14 +180,14 @@ const KonutListingForm = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     >
-                      <option value="Satılık">Satılık</option>
-                      <option value="Kiralık">Kiralık</option>
+                      <option value="Satılık">{t("Satılık")}</option>
+                      <option value="Kiralık">{t("Kiralık")}</option>
                     </select>
                   </div>
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="imar_durumu" className="form-label">
-                    İmar Durumu
+                    {t("İmar Durumu")}
                   </label>
                   <div className="select-has-icon icon-black">
                     <select
@@ -196,39 +197,43 @@ const KonutListingForm = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     >
-                      <option value="ada">Ada</option>
-                      <option value="a-Lejantlı">A-Lejantlı</option>
-                      <option value="arazi">Arazi</option>
-                      <option value="bahçe">Bahçe</option>
-                      <option value="depo">Depo</option>
-                      <option value="eğitim">Eğitim</option>
-                      <option value="enerji_depolama">Enerji depolama</option>
-                      <option value="konut">Konut</option>
-                      <option value="muhtelif">Muhtelif</option>
-                      <option value="özel_kullanım">Özel kullanım</option>
-                      <option value="sağlık">Sağlık</option>
-                      <option value="sanayi">Sanayi</option>
-                      <option value="sera">Sera</option>
-                      <option value="sit_alanı">Sit alanı</option>
-                      <option value="spor_alanı">Spor alanı</option>
-                      <option value="tarla">Tarla</option>
-                      <option value="ticari">ticari</option>
-                      <option value="toplu_konut">Toplu konut</option>
-                      <option value="turizm">Turizm</option>
-                      <option value="villa">Villa</option>
-                      <option value="zeytinlik">Zeytinlik</option>
+                      <option value="ada">{t("Ada")}</option>
+                      <option value="a-Lejantlı">{t("A-Lejantlı")}</option>
+                      <option value="arazi">{t("Arazi")}</option>
+                      <option value="bahçe">{t("Bahçe")}</option>
+                      <option value="depo">{"Depo"}</option>
+                      <option value="eğitim">{t("Eğitim")}</option>
+                      <option value="enerji_depolama">
+                        {t("Enerji Depolama")}
+                      </option>
+                      <option value="konut">{t("Konut")}</option>
+                      <option value="muhtelif">{t("Muhtelif")}</option>
+                      <option value="özel_kullanım">
+                        {t("Özel kullanım")}
+                      </option>
+                      <option value="sağlık">{t("Sağlık")}</option>
+                      <option value="sanayi">{t("Sanayi")}</option>
+                      <option value="sera">{t("Sera")}</option>
+                      <option value="sit_alanı">{t("Sit Alanı")}</option>
+                      <option value="spor_alanı">{t("Spor Alanı")}</option>
+                      <option value="tarla">{t("Tarla")}</option>
+                      <option value="ticari">{t("Ticari")}</option>
+                      <option value="toplu_konut">{t("Toplu Konut")}</option>
+                      <option value="turizm">{t("Turizm")}</option>
+                      <option value="villa">{t("Villa")}</option>
+                      <option value="zeytinlik">{t("Zeytinlik")}</option>
                     </select>
                   </div>
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="fiyat" className="form-label">
-                    fiyat
+                    {t("Fiyat")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="fiyat"
-                    placeholder="Fiyat"
+                    placeholder={t("Fiyat")}
                     value={formik.values.fiyat}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -236,13 +241,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="m2" className="form-label">
-                    m2
+                    {t("M2")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="m2"
-                    placeholder="m2"
+                    placeholder={t("M2")}
                     value={formik.values.m2}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -250,13 +255,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="ada_no" className="form-label">
-                    Ada No
+                    {t("Ada No")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="ada_no"
-                    placeholder="Ada No"
+                    placeholder={t("Ada No")}
                     value={formik.values.ada_no}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -264,13 +269,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="parsel_no" className="form-label">
-                    Parsel No
+                    {t("Parsel No")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="parsel_no"
-                    placeholder="Parsel No"
+                    placeholder={t("Parsel No")}
                     value={formik.values.parsel_no}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -278,14 +283,14 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="pafta_no" className="form-label">
-                    Pafta No
+                    {t("Pafta No")}
                   </label>
                   <input
                     type="text"
                     className="common-input"
                     id="pafta_no"
                     name="pafta_no"
-                    placeholder="Pafta No"
+                    placeholder={t("Pafta No")}
                     value={formik.values.pafta_no}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -293,13 +298,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="kaks" className="form-label">
-                    Kaks
+                    {t("Kaks")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="kaks"
-                    placeholder="kaks"
+                    placeholder={t("Kaks")}
                     value={formik.values.kaks}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -307,13 +312,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="gabari" className="form-label">
-                    Gabari
+                    {t("Gabari")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="gabari"
-                    placeholder="gabari"
+                    placeholder={t("Gabari")}
                     value={formik.values.gabari}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -321,13 +326,13 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="depozito" className="form-label">
-                    Depozito
+                    {t("Depozito")}
                   </label>
                   <input
                     type="number"
                     className="common-input"
                     id="depozito"
-                    placeholder="depozito"
+                    placeholder={t("Depozito")}
                     value={formik.values.depozito}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -335,7 +340,7 @@ const KonutListingForm = () => {
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="tapu_durumu" className="form-label">
-                    Tapu Durumu
+                    {t("Tapu Durumu")}
                   </label>
                   <div className="select-has-icon icon-black">
                     <select
@@ -345,25 +350,33 @@ const KonutListingForm = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     >
-                      <option value="hisseli_tapu">Hisseli Tapu</option>
-                      <option value="müstakil_tapulu">Müstakil Tapulu</option>
-                      <option value="tahsis_tapu">Tahsis Tapu</option>
-                      <option value="zilliyet_tapu">Zilliyet Tapu</option>
-                      <option value="yurt_dışı_tapulu">Yurt Dışı Tapulu</option>
-                      <option value="tapu_kaydı_yok">Tapu Kaydı Yok</option>
+                      <option value="hisseli_tapu">{t("Hisseli Tapu")}</option>
+                      <option value="müstakil_tapulu">
+                        {t("Müstakil Tapulu")}
+                      </option>
+                      <option value="tahsis_tapu">{t("Tahsis Tapu")}</option>
+                      <option value="zilliyet_tapu">
+                        {t("Zilliyet Tapu")}
+                      </option>
+                      <option value="yurt_dışı_tapulu">
+                        {t("Yurt Dışı Tapulu")}
+                      </option>
+                      <option value="tapu_kaydı_yok">
+                        {t("Tapu Kaydı Yok")}
+                      </option>
                     </select>
                   </div>
                 </div>
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="taşınmaz_numarası" className="form-label">
-                    Taşınmaz Numarası
+                    {t("Taşınmaz Numarası")}
                   </label>
                   <input
                     type="text"
                     className="common-input"
                     id="taşınmaz_numarası"
                     name="taşınmaz_numarası"
-                    placeholder="Taşınmaz Numarası"
+                    placeholder={t("Taşınmaz Numarası")}
                     value={formik.values.taşınmaz_numarası}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -377,14 +390,14 @@ const KonutListingForm = () => {
         <div className="card-item" id="propertyInformation">
           <div className="card common-card">
             <div className="card-header">
-              <h6 className="title mb-0">Konum Bilgileri</h6>
+              <h6 className="title mb-0">{t("Konum Bilgileri")}</h6>
             </div>
             <div className="card-body">
               <div className="row gy-4">
                 {/* il */}
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="İl" className="form-label">
-                    İl
+                    {t("İl")}
                   </label>
                   <div className="select-has-icon icon-black">
                     <select
@@ -406,7 +419,7 @@ const KonutListingForm = () => {
                 {/* içe */}
                 <div className="col-sm-6 col-xs-6">
                   <label htmlFor="İlçe" className="form-label">
-                    ilçe
+                    {t("İlçe")}
                   </label>
                   <div className="select-has-icon icon-black">
                     <select
@@ -429,45 +442,17 @@ const KonutListingForm = () => {
                 {/* mahalle */}
                 <div className="col-sm-12 col-xs-12">
                   <label htmlFor="Mahalle" className="form-label">
-                    Mahalle
+                    {t("Mahalle")}
                   </label>
                   <input
                     className="common-input"
                     id="Mahalle"
-                    placeholder="Mahalle"
+                    placeholder={t("Mahalle")}
                     value={formik.values.Mahalle}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
                 </div>
-                {/* <div className="col-sm-6 col-xs-6">
-                        <label htmlFor="lat" className="form-label">
-                          lat
-                        </label>
-                        <input
-                          type="number"
-                          className="common-input"
-                          id="lat"
-                          placeholder="lat"
-                          value={formik.values.lat}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                        />
-                      </div> */}
-                {/* <div className="col-sm-6 col-xs-6">
-                        <label htmlFor="lng" className="form-label">
-                          lng
-                        </label>
-                        <input
-                          type="number"
-                          className="common-input"
-                          id="lng"
-                          placeholder="lng"
-                          value={formik.values.lng}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                        />
-                      </div> */}
                 <div className="col-12">
                   {/* harita */}
                   <div className="col-sm-12">
@@ -490,7 +475,7 @@ const KonutListingForm = () => {
         <div className="card-item" id="propertyGallery">
           <div className="card common-card">
             <div className="card-header">
-              <h6 className="title mb-0">Fotoğraflar</h6>
+              <h6 className="title mb-0">{t("Fotoğraflar")}</h6>
             </div>
             <div className="card-body">
               <div className="image-uploader">
@@ -498,7 +483,7 @@ const KonutListingForm = () => {
                   htmlFor="ImageUploadLabel"
                   className="image-uploader__label"
                 >
-                  <span className="d-none">Resim Yükle</span>
+                  <span className="d-none">{t("Resim Yükle")}</span>
                 </label>
 
                 <input
@@ -533,7 +518,7 @@ const KonutListingForm = () => {
                       <i className="fas fa-cloud-upload-alt"></i>
                     </span>
                     <span className="upload-text__text">
-                      Fotoğraf Yüklemek İçin Tıklayınız
+                      {t("Fotoğraf Yüklemek İçin Tıklayınız")}
                     </span>
                   </div>
                 )}
@@ -545,7 +530,7 @@ const KonutListingForm = () => {
         <div className="card-item" id="propertyInformation">
           <div className="card common-card">
             <div className="card-header">
-              <h6 className="title mb-0">Ek Bilgiler</h6>
+              <h6 className="title mb-0">{t("Ek Bilgiler")}</h6>
             </div>
             <div className="card-body">
               <div className="row gy-4">
@@ -567,7 +552,7 @@ const KonutListingForm = () => {
                             className="form-check-label"
                             htmlFor="krediye_uygunluk"
                           >
-                            Krediye Uygunluk
+                            {t("Krediye Uygunluk")}
                           </label>
                         </div>
                         <div className="common-check">
@@ -581,7 +566,7 @@ const KonutListingForm = () => {
                             onBlur={formik.handleBlur}
                           />
                           <label className="form-check-label" htmlFor="takaslı">
-                            takaslı
+                            {t("Takaslı")}
                           </label>
                         </div>
                       </div>
@@ -593,7 +578,7 @@ const KonutListingForm = () => {
           </div>
         </div>
         <button type="submit" className="btn btn-main w-100">
-          Kaydet
+          {t("Kaydet")}
         </button>
       </form>
     </>

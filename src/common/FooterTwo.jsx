@@ -4,8 +4,8 @@ import FooterServiceItem from "./footer/FooterServiceItem";
 import FooterLogoDesc from "./footer/FooterLogoDesc";
 import FooterInfo from "./footer/FooterInfo";
 import SocialList from "./SocialList";
-import SubscribeBox from "./footer/SubscribeBox";
 import axios from "../axios.js";
+import { useTranslation } from "react-i18next";
 
 const FooterTwo = () => {
   const [footerData, setFooterData] = useState(null);
@@ -20,6 +20,8 @@ const FooterTwo = () => {
         console.error("Error fetching settings:", error);
       });
   }, []);
+
+  const { t } = useTranslation();
   return (
     <>
       {/* ==================== Footer Two Start Here ==================== */}
@@ -31,7 +33,7 @@ const FooterTwo = () => {
                 <FooterLogoDesc />
 
                 <h6 className="footer-item__title mt-4 mt-lg-5">
-                  Bugünün işini yarına bırakma ara
+                  {t("Bugünün işini yarına bırakma ara")}
                 </h6>
 
                 <FooterInfo footerData={footerData} />
@@ -44,7 +46,7 @@ const FooterTwo = () => {
             <div className="col-xl-1 d-xl-block d-none"></div>
             <div className="col-xl-3 col-sm-6">
               <div className="footer-item">
-                <h6 className="footer-item__title">Sosyal Medya</h6>
+                <h6 className="footer-item__title">{t("Sosyal Medya")}</h6>
                 <SocialList footerData={footerData} />
               </div>
             </div>

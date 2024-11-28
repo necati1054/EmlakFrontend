@@ -1,7 +1,8 @@
 import React from "react";
-import { footerInfos } from "../../data/CommonData/CommonData";
+import { useTranslation } from "react-i18next";
 
 const FooterInfo = ({ footerData }) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="row gy-4">
@@ -11,7 +12,9 @@ const FooterInfo = ({ footerData }) => {
               <i className="fas fa-map-marker-alt"></i>
             </span>
             <div className="contact-info__content">
-              <span className="contact-info__text text-white">Address</span>
+              <span className="contact-info__text text-white">
+                {t("Adres")}
+              </span>
               <span className="contact-info__address text-white">
                 {footerData?.find((item) => item.key === "address")?.value}
               </span>
@@ -24,7 +27,9 @@ const FooterInfo = ({ footerData }) => {
               <i className="fas fa-phone"></i>
             </span>
             <div className="contact-info__content">
-              <span className="contact-info__text text-white">Phone</span>
+              <span className="contact-info__text text-white">
+                {t("Telefon")}
+              </span>
               <span className="contact-info__address text-white">
                 {footerData?.find((item) => item.key === "phone")?.value}
               </span>
@@ -37,7 +42,9 @@ const FooterInfo = ({ footerData }) => {
               <i className="fas fa-envelope"></i>
             </span>
             <div className="contact-info__content">
-              <span className="contact-info__text text-white">Email</span>
+              <span className="contact-info__text text-white">
+                {t("E-Posta")}
+              </span>
               <span className="contact-info__address text-white">
                 {footerData?.find((item) => item.key === "email")?.value}
               </span>

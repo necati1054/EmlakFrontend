@@ -5,8 +5,8 @@ import { MobileMenuContext } from "../contextApi/MobileMenuContext";
 import { OffCanvasContext } from "../contextApi/OffCanvasContext";
 import { ScrollHideContext } from "../contextApi/ScrollHideContext";
 import Button from "./Button";
-import { Link } from "react-router-dom";
 import LogoWhite from "./LogoWhite";
+import { useTranslation } from "react-i18next";
 
 const Header = (props) => {
   const { handleMobileMenuClick } = useContext(MobileMenuContext);
@@ -25,6 +25,14 @@ const Header = (props) => {
     });
   }, []);
 
+  const lngs = {
+    tr: { nativeName: "Türkçe" },
+    en: { nativeName: "İngilizce" },
+    de: { nativeName: "Almanca" },
+    fr: { nativeName: "Fransızca" },
+    by: { nativeName: "Rusça" },
+  };
+  const { t, i18n } = useTranslation();
   return (
     <>
       {/* ==================== Header Start Here ==================== */}
@@ -40,13 +48,11 @@ const Header = (props) => {
                 <Logo />
               </div>
             )}
-
             {props.logoWhite && (
               <div className="logo">
                 <LogoWhite />
               </div>
             )}
-
             {/* Menu Start  */}
             <div
               className={`header-menu d-lg-block d-none ${props.headerMenusClass}`}
@@ -54,8 +60,8 @@ const Header = (props) => {
               <NavMenu navMenusClass="" />
             </div>
             {/* Menu End  */}
-
             {/* Header Right start */}
+
             <div className="header-right flx-align">
               {props.showOffCanvasBtn && (
                 <button
@@ -94,6 +100,7 @@ const Header = (props) => {
                   </svg>
                 </button>
               )}
+
               {/* header daki button burada */}
               {props.showHeaderBtn && (
                 <Button
@@ -104,6 +111,25 @@ const Header = (props) => {
                   iconClass="fas fa-arrow-right"
                 />
               )}
+
+              {/* Dil değiştirme dropdown */}
+              <select
+                className="ms-3"
+                value={i18n.resolvedLanguage}
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value);
+                }}
+              >
+                {Object.keys(lngs).map((lng) => (
+                  <option
+                    value={lng}
+                    key={lng}
+                    disabled={i18n.resolvedLanguage == lng}
+                  >
+                    {lngs[lng].nativeName}
+                  </option>
+                ))}
+              </select>
 
               <button
                 type="button"
@@ -116,7 +142,6 @@ const Header = (props) => {
                 <i className="las la-bars"></i>
               </button>
             </div>
-
             {/* Header Right End  */}
           </nav>
         </div>

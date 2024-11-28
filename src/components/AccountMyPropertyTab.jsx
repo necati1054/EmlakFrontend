@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Pagination from "../common/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios.js";
 import Config from "../urlConf.js";
+import { useTranslation } from "react-i18next";
 
 const AccountMyPropertyTab = () => {
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ const AccountMyPropertyTab = () => {
   const [data, setData] = useState([]);
   const [state, setState] = useState(null);
   let control = false;
+
+  const { t } = useTranslation();
 
   const getData = async () => {
     await axios.get("/user/" + userData.id + "/ilans").then((res) => {
@@ -73,7 +75,7 @@ const AccountMyPropertyTab = () => {
   if (!userData) return null;
 
   if (data && data.ilans === 0 && control) {
-    return <h1>Yükleniyor Lütfen Bekleyiniz</h1>;
+    return <h1>{t("Yükleniyor Lütfen Bekleyiniz")}</h1>;
   }
 
   function formatDateToDayMonthYear(dateString) {
@@ -212,7 +214,7 @@ const AccountMyPropertyTab = () => {
             onClick={() => setState(1)}
             className="btn btn-main w-100"
           >
-            Konut
+            {t("Konut")}
           </button>
         </div>
         <div className="col-md-4">
@@ -221,7 +223,7 @@ const AccountMyPropertyTab = () => {
             onClick={() => setState(2)}
             className="btn btn-main w-100"
           >
-            Arsa
+            {t("Arsa")}
           </button>
         </div>
         <div className="col-md-4">
@@ -230,7 +232,7 @@ const AccountMyPropertyTab = () => {
             onClick={() => setState(3)}
             className="btn btn-main w-100"
           >
-            İş Yeri
+            {t("İş Yeri")}
           </button>
         </div>
       </div>
@@ -242,11 +244,11 @@ const AccountMyPropertyTab = () => {
                 <table className="table style-two">
                   <thead>
                     <tr>
-                      <th>İlanlarım</th>
-                      <th>Eklenme Tarihi</th>
-                      <th>Aksiyon</th>
-                      <th>Aktif / Pasif</th>
-                      <th>Sil</th>
+                      <th>{t("İlanlarım")}</th>
+                      <th>{t("Eklenme Tarihi")}</th>
+                      <th>{t("Aksiyon")}</th>
+                      <th>{t("Aktif / Pasif")}</th>
+                      <th>{t("Sil")}</th>
                     </tr>
                   </thead>
                   <tbody>

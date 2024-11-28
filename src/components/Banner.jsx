@@ -1,18 +1,24 @@
 import { useEffect, useState, React } from "react";
-// import { bannerContent } from "./../data/HomeOneData/HomeOneData";
 import TabFilter from "../common/TabFilter";
 import BannerImg from "../../public/assets/images/thumbs/banner-img.png";
+import { useTranslation } from "react-i18next";
 
 const Banner = () => {
+  const { t } = useTranslation();
+
   const [propertyTypeIndex, setPropertyTypeIndex] = useState(0);
 
-  const propertyTypesV2 = ["Evi", "Arsayı", "İş Yerini"];
+  const propertyTypesV2 = [t("Evi"), t("Arsayı"), t("İş Yerini")];
 
   const bannerContent = {
-    subtitle: "FinTech Fusion",
-    title: "Bugün şanslı günündesin",
-    gradientTitle: `İstediğin ${propertyTypesV2[propertyTypeIndex]} bulacaksın`,
-    desc: "Gayrimenkulün Gücünü Ortaya Çıkarın Gayrimenkul Hayallerinizi Gerçeğe Dönüştürün Gayrimenkulün Gücünü Ortaya Çıkarın",
+    subtitle: "CitySpace",
+    title: t("Bugün şanslı günündesin"),
+    gradientTitle: t("İstediğin {{propertyType}} bulacaksın", {
+      propertyType: propertyTypesV2[propertyTypeIndex],
+    }),
+    desc: t(
+      "Gayrimenkulün Gücünü Ortaya Çıkarın Gayrimenkul Hayallerinizi Gerçeğe Dönüştürün Gayrimenkulün Gücünü Ortaya Çıkarın"
+    ),
     thumb: BannerImg,
   };
 
@@ -38,7 +44,7 @@ const Banner = () => {
                   <div className="banner-content">
                     <span className="banner-content__subtitle text-uppercase font-14">
                       {" "}
-                      {/* {bannerContent.subtitle}{" "} */}
+                      {bannerContent.subtitle}{" "}
                     </span>
                     <h1 className="banner-content__title">
                       {bannerContent.title}{" "}

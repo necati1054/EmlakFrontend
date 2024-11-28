@@ -3,24 +3,25 @@ import React from "react";
 import Filter from "../common/Filter";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Link } from "react-router-dom";
-// import { filterTabs } from "../data/HomeOneData/HomeOneData";
-
-const filterTabs = [
-  {
-    id: 1,
-    text: "konut",
-  },
-  {
-    id: 2,
-    text: "isyeri",
-  },
-  {
-    id: 3,
-    text: "arsa",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const TabFilter = (props) => {
+  const { t } = useTranslation();
+  const filterTabs = [
+    {
+      id: 1,
+      text: t("konut"),
+    },
+    {
+      id: 2,
+      text: t("isyeri"),
+    },
+    {
+      id: 3,
+      text: t("arsa"),
+    },
+  ];
+
   return (
     <>
       <Tabs>
@@ -30,9 +31,11 @@ const TabFilter = (props) => {
               {filterTab.text}
             </Tab>
           ))}
-          <Link to="/map">
-            <Tab className={"nav-link"}>Harita İle Ara</Tab>
-          </Link>
+          <Tab key={filterTabs.length} className={"nav-link"}>
+            <Link to="/map" style={{ color: "black" }}>
+              Harita İle Ara
+            </Link>
+          </Tab>
         </TabList>
         {filterTabs.map((filterTab, index) => (
           <TabPanel key={index}>
@@ -43,6 +46,9 @@ const TabFilter = (props) => {
             />
           </TabPanel>
         ))}
+        <TabPanel key="map">
+          <p>Map content goes here</p>
+        </TabPanel>
       </Tabs>
     </>
   );

@@ -1,10 +1,10 @@
 import React from "react";
 import SectionHeading from "../common/SectionHeading";
 import PropertyItem from "./items/PropertyItem";
-import { properties } from "../data/HomeOneData/HomeOneData";
-import Button from "../common/Button";
+import { useTranslation } from "react-i18next";
 
 const Property = ({ title, propertyData, ilan_type }) => {
+  const { t } = useTranslation();
   return (
     <>
       {/* ============================ property Start ==================== */}
@@ -12,7 +12,7 @@ const Property = ({ title, propertyData, ilan_type }) => {
         <div className="container container-two">
           <SectionHeading
             headingClass="style-left style-dark flx-between align-items-end gap-3"
-            subtitle="En Son Eklenenler"
+            subtitle={t("En Son Eklenenler")}
             subtitleClass=""
             title={title}
             renderDesc={false}
@@ -22,7 +22,7 @@ const Property = ({ title, propertyData, ilan_type }) => {
               ilan_type == 1 ? "/konut" : ilan_type == 2 ? "/isyeri" : "/arsa"
             }`}
             buttonClass="btn-main"
-            buttonText="Bütün İlanları Gör"
+            buttonText={t("Bütün İlanları Gör")}
           />
 
           <div className="row gy-4 property-item-wrapper">

@@ -2,16 +2,15 @@ import React from "react";
 import Header from "../common/Header";
 import FooterTwo from "./../common/FooterTwo";
 import Breadcrumb from "../common/Breadcrumb";
-import Cta from "../components/Cta";
 import ContactTop from "../components/ContactTop";
-import ContactUsSection from "../components/ContactUsSection";
 import PageTitle from "../common/PageTitle";
-import { HelmetProvider } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <PageTitle title="CityScape - Contact Us" />
+      <PageTitle title={`CityScape - ${t("İletişim")}`} />
 
       <main className="body-bg">
         {/* Header */}
@@ -30,10 +29,8 @@ const Contact = () => {
           showContactNumber={false}
         />
 
-        {/* BreadCrumb */}
         <Breadcrumb pageTitle="İletişim" pageName="İletişim" />
 
-        {/* Contact Top */}
         <ContactTop />
 
         <div className="contact-map address-map">
@@ -45,13 +42,6 @@ const Contact = () => {
           ></iframe>
         </div>
 
-        {/* Contact Us Section
-        <ContactUsSection /> */}
-
-        {/* Cta
-        <Cta ctaClass="" /> */}
-
-        {/* Footer */}
         <FooterTwo />
       </main>
     </>

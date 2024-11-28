@@ -1,19 +1,16 @@
 import React from "react";
 import Header from "../common/Header";
-import Footer from "../common/Footer";
-import Breadcrumb from "../common/Breadcrumb";
-import Cta from "../components/Cta";
-import LoginRegister from "../components/LoginRegister";
 import PageTitle from "../common/PageTitle";
 import LoginSection from "../components/LoginSection";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <PageTitle title="Emlak - Login" />
+      <PageTitle title={`CityScape - ${t("Giriş")}`} />
 
       <main className="body-bg">
-        {/* Header */}
         <Header
           headerClass="dark-header has-border"
           logoBlack={false}
@@ -29,16 +26,7 @@ const Login = () => {
           showContactNumber={false}
         />
 
-        {/* BreadCrumb */}
-        {/* <Breadcrumb pageTitle="Login" pageName="Login" /> */}
-
         <LoginSection />
-
-        {/* Cta */}
-        {/* <Cta ctaClass="" /> */}
-
-        {/* Footer */}
-        {/* <Footer /> */}
       </main>
     </>
   );

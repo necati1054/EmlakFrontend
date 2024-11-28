@@ -4,27 +4,29 @@ import Button from "../common/Button";
 import CountUp from "react-countup";
 
 import AboutThreeThumb from "../../public/assets/images/thumbs/about-three-img.png";
-
-export const aboutCheckLists = [
-  {
-    icon: <i className="fas fa-check"></i>,
-    text: "Rüya Emlak Çözümleri",
-  },
-  {
-    icon: <i className="fas fa-check"></i>,
-    text: "Prestij Gayrimenkul Yönetimi",
-  },
-  {
-    icon: <i className="fas fa-check"></i>,
-    text: "Güvenli Mülk Ortakları",
-  },
-  {
-    icon: <i className="fas fa-check"></i>,
-    text: "Küresel Gayrimenkul Yatırımları",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const AboutThree = () => {
+  const { t } = useTranslation();
+  const aboutCheckLists = [
+    {
+      icon: <i className="fas fa-check"></i>,
+      text: t("Rüya Emlak Çözümleri"),
+    },
+    {
+      icon: <i className="fas fa-check"></i>,
+      text: t("Prestij Gayrimenkul Yönetimi"),
+    },
+    {
+      icon: <i className="fas fa-check"></i>,
+      text: t("Güvenli Mülk Ortakları"),
+    },
+    {
+      icon: <i className="fas fa-check"></i>,
+      text: t("Küresel Gayrimenkul Yatırımları"),
+    },
+  ];
+
   return (
     <>
       <section className="about-three bg-white padding-y-120">
@@ -40,13 +42,14 @@ const AboutThree = () => {
                         <CountUp end={parseInt(10)} duration={6} delay={0.2} />k{" "}
                       </h2>
                       <span className="project-content__text font-12">
-                        Complete project
+                        {t("Tamamlanan Proje")}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            {/* /!DESC - Buradaki Veriler Veri Tabanından Gelecek */}
             <div className="col-lg-6">
               <div className="about-content">
                 <SectionHeading

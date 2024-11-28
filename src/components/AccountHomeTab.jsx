@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { services } from "../data/HomeTwoData/HomeTwoData";
-import { Link } from "react-router-dom";
 import axios from "../axios.js";
 import KonutIcon from "../../public/assets/images/icons/Konut_Icon.png";
 import ArsaIcon from "../../public/assets/images/icons/Arsa_Icon.svg";
 import IşYeriIcon from "../../public/assets/images/icons/IşYeri_Icon.png";
+import { useTranslation } from "react-i18next";
 
 const AccountHomeTab = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userData = JSON.parse(storedUser);
@@ -47,15 +47,13 @@ const AccountHomeTab = () => {
   if (!userData) return null;
 
   if (data && control) {
-    return <h1>Yükleniyor Lütfen Bekleyiniz</h1>;
+    return <h1>{t("Yükleniyor Lütfen Bekleyiniz")}</h1>;
   }
-
-  console.log(data);
 
   return (
     <>
       <p className="account-alert">
-        Selam 👋{" "}
+        {t("Selam")} 👋{" "}
         <strong className="text-heading fw-500 text-poppins">
           {userData.name} {userData.surname}
         </strong>{" "}
@@ -88,10 +86,11 @@ const AccountHomeTab = () => {
                   />
                 </span>
                 <h6 className="service-item__title">
-                  Aktif İlan Sayısı = {data?.KonutIlanCount?.active}
+                  {t("Aktif İlan Sayısı")} = {data?.KonutIlanCount?.active}
                 </h6>
                 <span className="service-item__text font-18 d-block">
-                  Pasif / Silinmiş İlan Sayısı = {data?.KonutIlanCount?.passive}
+                  {t("Pasif / Silinmiş İlan Sayısı")} ={" "}
+                  {data?.KonutIlanCount?.passive}
                 </span>
               </div>
             </div>
@@ -119,10 +118,11 @@ const AccountHomeTab = () => {
                   />
                 </span>
                 <h6 className="service-item__title">
-                  Aktif İlan Sayısı = {data?.ArsaIlanCount?.active}
+                  {t("Aktif İlan Sayısı")} = {data?.ArsaIlanCount?.active}
                 </h6>
                 <span className="service-item__text font-18 d-block">
-                  Pasif / Silinmiş İlan Sayısı = {data?.ArsaIlanCount?.passive}
+                  {t("Pasif / Silinmiş İlan Sayısı")} ={" "}
+                  {data?.ArsaIlanCount?.passive}
                 </span>
               </div>
             </div>
@@ -150,10 +150,10 @@ const AccountHomeTab = () => {
                   />
                 </span>
                 <h6 className="service-item__title">
-                  Aktif İlan Sayısı = {data?.IsYeriIlanCount?.active}
+                  {t("Aktif İlan Sayısı")} = {data?.IsYeriIlanCount?.active}
                 </h6>
                 <span className="service-item__text font-18 d-block">
-                  Pasif / Silinmiş İlan Sayısı ={" "}
+                  {t("Pasif / Silinmiş İlan Sayısı")} ={" "}
                   {data?.IsYeriIlanCount?.passive}
                 </span>
               </div>

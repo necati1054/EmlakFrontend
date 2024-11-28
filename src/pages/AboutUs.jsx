@@ -1,18 +1,16 @@
 import React from "react";
 import Header from "../common/Header";
 import FooterTwo from "./../common/FooterTwo";
-import Breadcrumb from "../common/Breadcrumb";
-import Cta from "../components/Cta";
 import AboutThree from "../components/AboutThree";
-import PropertyTypeThree from "../components/PropertyTypeThree";
-import Team from "../components/Team";
 import PageTitle from "../common/PageTitle";
+import { useTranslation } from "react-i18next";
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   return (
     <>
-      <PageTitle title="CityScape - About Us" />
-      {/* Header */}
+      <PageTitle title={`CityScape - ${t("Hakkımızda")}`} />
+
       <Header
         headerClass="dark-header has-border"
         logoBlack={false}
@@ -27,14 +25,11 @@ const AboutUs = () => {
         offCanvasBtnClass=""
         showContactNumber={false}
       />
-      {/* BreadCrumb */}
-      {/* <Breadcrumb pageTitle="Hakkımızda" pageName="Hakkımızda" /> */}
+
       <AboutThree />
-      {/* <Team /> */}
-      <PropertyTypeThree />
-      {/* Cta
-      <Cta ctaClass="" /> */}
-      {/* Footer */}
+
+      {/* <PropertyTypeThree /> */}
+
       <FooterTwo />
     </>
   );

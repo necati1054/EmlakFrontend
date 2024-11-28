@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-
-const navMenus = [
-  {
-    text: "Ana Sayfa",
-    path: "/",
-  },
-  {
-    text: "Hakkımızda",
-    path: "/about-us",
-  },
-  {
-    text: "Sıkça Sorulan Sorular",
-    path: "/faq",
-  },
-  {
-    text: "İletişim",
-    path: "/Contact",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const NavMenu = (props) => {
+  const { t } = useTranslation();
+
+  const navMenus = [
+    {
+      text: t("Ana Sayfa"),
+      path: "/",
+    },
+    {
+      text: t("Hakkımızda"),
+      path: "/about-us",
+    },
+    {
+      text: t("Sıkça Sorulan Sorular"),
+      path: "/faq",
+    },
+    {
+      text: t("İletişim"),
+      path: "/Contact",
+    },
+  ];
+
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleDropdownOpen = (index) => {
