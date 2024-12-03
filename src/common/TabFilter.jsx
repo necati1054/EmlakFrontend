@@ -33,7 +33,7 @@ const TabFilter = (props) => {
           ))}
           <Tab key={filterTabs.length} className={"nav-link"}>
             <Link to="/map" style={{ color: "black" }}>
-              Harita İle Ara
+              {t("Harita İle Ara")}
             </Link>
           </Tab>
         </TabList>
