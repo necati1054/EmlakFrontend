@@ -31,6 +31,7 @@ const Header = (props) => {
     de: { nativeName: "Almanca" },
     fr: { nativeName: "Fransızca" },
     by: { nativeName: "Rusça" },
+    it: { nativeName: "İtalyanca" },
   };
   const { t, i18n } = useTranslation();
   return (
