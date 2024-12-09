@@ -36,13 +36,13 @@ const AccountSection = () => {
         console.log("You Logged out Successfully");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login" + "/" + lang);
+        navigate("/" + lang + "/login");
       })
       .catch((err) => {
         console.log(err);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login" + "/" + lang);
+        navigate("/" + lang + "/login");
       });
   };
 
