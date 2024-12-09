@@ -3,24 +3,26 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const NavMenu = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  let lang = i18n.resolvedLanguage;
 
   const navMenus = [
     {
       text: t("Ana Sayfa"),
-      path: "/",
+      path: "/" + lang,
     },
     {
       text: t("Hakkımızda"),
-      path: "/about-us",
+      path: "/" + lang + "/about-us",
     },
     {
       text: t("Sıkça Sorulan Sorular"),
-      path: "/faq",
+      path: "/" + lang + "/faq",
     },
     {
       text: t("İletişim"),
-      path: "/Contact",
+      path: "/" + lang + "/Contact",
     },
   ];
 

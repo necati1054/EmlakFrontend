@@ -9,7 +9,8 @@ import { jwtDecode } from "jwt-decode";
 import { useTranslation } from "react-i18next";
 
 const LoginSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -52,7 +53,7 @@ const LoginSection = () => {
         .post("/login", values)
         .then((res) => {
           setSession(res.data.access_token);
-          navigate("/account");
+          navigate("/" + lang + "/account");
           resetForm({ values: "" });
           toast.success(t("Giriş Başarılı"), {
             theme: "colored",
@@ -180,7 +181,7 @@ const LoginSection = () => {
                             <p className="text">
                               {t("Hesabınız Yok Mu")}?{" "}
                               <Link
-                                to="/register"
+                                to={"/" + lang + "/register"}
                                 className="link text-main text-decoration-underline font-14 text-poppins"
                               >
                                 {" "}

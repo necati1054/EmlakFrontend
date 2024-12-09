@@ -9,6 +9,7 @@ import { slugURL } from "../utility/Utility";
 import { Link } from "react-router-dom";
 
 import Config from "../urlConf";
+import { useTranslation } from "react-i18next";
 
 import {
   GoogleMap,
@@ -19,6 +20,8 @@ import {
 
 const Map = () => {
   const API_KEY = "AIzaSyCZ2lv_291yFguiqfick2M6d_jatFdjFNs";
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
 
   const [properties, setProperties] = useState([]);
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -46,7 +49,7 @@ const Map = () => {
   }
 
   const propertyURL = slugURL({
-    url: "property",
+    url: `${lang}/property`,
     id: selectedProperty?.id,
     ilanType: tip == "konut" ? 1 : tip.isyeri == "isyeri" ? 2 : "arsa",
   });

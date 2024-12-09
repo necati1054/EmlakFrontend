@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeading from "../common/SectionHeading";
 import Button from "../common/Button";
 import CountUp from "react-countup";
 
 import AboutThreeThumb from "../../public/assets/images/thumbs/about-three-img.png";
 import { useTranslation } from "react-i18next";
+import axios from "../axios.js";
 
 const AboutThree = () => {
   const { t } = useTranslation();
+  const [settings, setSettingsData] = useState(null);
   const aboutCheckLists = [
     {
       icon: <i className="fas fa-check"></i>,
@@ -26,6 +28,17 @@ const AboutThree = () => {
       text: t("Küresel Gayrimenkul Yatırımları"),
     },
   ];
+
+  useEffect(() => {
+    axios
+      .get("/settings")
+      .then((response) => {
+        setSettingsData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching settings:", error);
+      });
+  }, []);
 
   return (
     <>
@@ -54,11 +67,17 @@ const AboutThree = () => {
               <div className="about-content">
                 <SectionHeading
                   headingClass="style-left"
-                  subtitle="Hakkımızda"
+                  subtitle={
+                    settings?.find((item) => item.key === "h_subtitle")?.value
+                  }
                   subtitleClass="bg-gray-100"
-                  title="Yeni mülkünüzün kapısının kilidini açın"
+                  title={
+                    settings?.find((item) => item.key === "h_title")?.value
+                  }
                   renderDesc={true}
-                  desc="emlak, mülklerin satın alınmasını, satılmasını ve kiralanmasını içeren kazançlı bir endüstridir.Emlakçılar, gayrimenkulün kolaylaştırılmasında çok önemli bir rol oynamaktadır."
+                  desc={
+                    settings?.find((item) => item.key === "h_aciklama")?.value
+                  }
                   renderButton={false}
                   buttonClass="btn-main"
                   buttonText="View More"

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FaqItem from "../components/items/FaqItem";
-// import { faqs } from "../data/HomeThreeData/HomeThreeData";
+import axios from "../axios.js";
 
 const faqs = [
   {
@@ -43,15 +43,28 @@ const faqs = [
 
 const FaqAccordion = (props) => {
   const [activeAccordion, setActiveAccordion] = useState(null);
+  const [faqData, setFaqData] = useState(null);
 
   const handleAccordionClick = (faqId) => {
     setActiveAccordion(activeAccordion === faqId ? null : faqId);
   };
 
+  useEffect(() => {
+    axios
+      .get("/faq")
+      .then((response) => {
+        setFaqData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching settings:", error);
+      });
+  }, []);
+
   return (
     <>
       <div className={`common-accordion accordion ${props.accordionClass}`}>
-        {faqs.map((faq, faqIndex) => {
+        {faqData?.map((faq, faqIndex) => {
           return (
             <FaqItem
               itemClass={props.itemClass}

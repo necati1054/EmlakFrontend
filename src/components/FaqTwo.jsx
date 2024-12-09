@@ -1,6 +1,6 @@
 import React from "react";
 import FaqAccordion from "../common/FaqAccordion";
-import FaqTwoThumb from "../../public/assets/images/thumbs/faq-two-img.png";
+import FaqTwoThumb from "../../public/assets/images/faq/faq.jpeg";
 import SectionHeading from "../common/SectionHeading";
 
 const FaqTwo = () => {
@@ -25,7 +25,7 @@ const FaqTwo = () => {
           </div>
           <div className="col-lg-6 ps-lg-4 d-lg-block d-none">
             <div className="faq-two-thumb">
-              <img src={FaqTwoThumb} alt="" />
+              <img src={FaqTwoThumb} alt="" style={{ borderRadius: "8px" }} />
             </div>
           </div>
         </div>

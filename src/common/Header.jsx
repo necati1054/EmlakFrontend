@@ -7,9 +7,21 @@ import { ScrollHideContext } from "../contextApi/ScrollHideContext";
 import Button from "./Button";
 import LogoWhite from "./LogoWhite";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import tr_flag from "/assets/images/flag/turkey.png";
+import en_flag from "/assets/images/flag/abd.png";
+import de_flag from "/assets/images/flag/germany.png";
+import fr_flag from "/assets/images/flag/franch.png";
+import by_flag from "/assets/images/flag/russian.png";
+import it_flag from "/assets/images/flag/italian.png";
+
+import "../../public/assets/css/dropdown.css";
 
 const Header = (props) => {
+  const navigate = useNavigate();
   const { handleMobileMenuClick } = useContext(MobileMenuContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { handleOffCanvas } = useContext(OffCanvasContext);
 
@@ -26,14 +38,29 @@ const Header = (props) => {
   }, []);
 
   const lngs = {
-    tr: { nativeName: "Türkçe" },
-    en: { nativeName: "İngilizce" },
-    de: { nativeName: "Almanca" },
-    fr: { nativeName: "Fransızca" },
-    by: { nativeName: "Rusça" },
-    it: { nativeName: "İtalyanca" },
+    tr: { nativeName: "Türkçe", flag: tr_flag },
+    en: { nativeName: "İngilizce", flag: en_flag },
+    de: { nativeName: "Almanca", flag: de_flag },
+    fr: { nativeName: "Fransızca", flag: fr_flag },
+    by: { nativeName: "Rusça", flag: by_flag },
+    it: { nativeName: "İtalyanca", flag: it_flag },
   };
   const { t, i18n } = useTranslation();
+
+  const location = useLocation();
+
+  const chaneLanguage = (e) => {
+    i18n.changeLanguage(e);
+    // i18n.changeLanguage(e.target.value);
+    const currentPath = location.pathname;
+    // const updatedPath = currentPath.replace(
+    //   /^\/[a-z]{2}/,
+    //   `/${e.target.value}`
+    // );
+    const updatedPath = currentPath.replace(/^\/[a-z]{2}/, `/${e}`);
+    navigate(updatedPath);
+    setIsOpen(false);
+  };
   return (
     <>
       {/* ==================== Header Start Here ==================== */}
@@ -114,11 +141,11 @@ const Header = (props) => {
               )}
 
               {/* Dil değiştirme dropdown */}
-              <select
+              {/* <select
                 className="ms-3"
                 value={i18n.resolvedLanguage}
                 onChange={(e) => {
-                  i18n.changeLanguage(e.target.value);
+                  chaneLanguage(e);
                 }}
               >
                 {Object.keys(lngs).map((lng) => (
@@ -127,10 +154,41 @@ const Header = (props) => {
                     key={lng}
                     disabled={i18n.resolvedLanguage == lng}
                   >
-                    {lngs[lng].nativeName}
+                    <img src={lngs[lng].flag} alt="" />
                   </option>
                 ))}
-              </select>
+              </select> */}
+
+              {/*  */}
+              <div
+                className="dropdown-container"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <div className="selected-language">
+                  <img
+                    src={lngs[i18n.resolvedLanguage].flag}
+                    alt={i18n.resolvedLanguage}
+                  />
+                  <span>{lngs[i18n.resolvedLanguage].name}</span>
+                </div>
+                {isOpen && (
+                  <div className="dropdown-options">
+                    {Object.keys(lngs).map((lng) => (
+                      <div
+                        key={lng}
+                        className={`dropdown-option ${
+                          i18n.resolvedLanguage === lng ? "disabled" : ""
+                        }`}
+                        onClick={() => chaneLanguage(lng)}
+                      >
+                        <img src={lngs[lng].flag} alt={lng} />
+                        <span>{lngs[lng].name}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/*  */}
 
               <button
                 type="button"

@@ -29,7 +29,7 @@ const Contact = () => {
           showContactNumber={false}
         />
 
-        <Breadcrumb pageTitle="İletişim" pageName="İletişim" />
+        {/* <Breadcrumb pageTitle="İletişim" pageName="İletişim" /> */}
 
         <ContactTop />
 

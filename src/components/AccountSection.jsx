@@ -7,6 +7,11 @@ import AccountDetailsTab from "./AccountDetailsTab";
 import AccountMyPropertyTab from "./AccountMyPropertyTab";
 import AccountAddPropertyTab from "./AccountAddPropertyTab";
 import AccountChangePasswordTab from "./AccountChangePasswordTab";
+
+import WebSiteSettingsTab from "./WebSiteSettingsTab.jsx";
+import AboutSettingsTab from "./AboutSettingsTab.jsx";
+import FaqSettings from "./FaqSettings.jsx";
+
 import { ToastContainer, toast } from "react-toastify";
 import axios from "../axios.js";
 import { useTranslation } from "react-i18next";
@@ -14,6 +19,8 @@ import { useTranslation } from "react-i18next";
 const AccountSection = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const storedUser = localStorage.getItem("user");
+  const userData = JSON.parse(storedUser);
 
   const notify = () =>
     toast.success("You have been logged out", {
@@ -65,6 +72,35 @@ const AccountSection = () => {
     },
   ];
 
+  const adminAccountTabs = [
+    {
+      icon: <i className="fas fa-home"></i>,
+      text: t("Ana Sayfa"),
+    },
+    {
+      icon: <i className="fas fa-user"></i>,
+      text: t("Profilim"),
+    },
+    {
+      icon: <i className="fas fa-lock"></i>,
+      text: t("Şifre Değiştir"),
+    },
+    {
+      icon: <i className="fas fa-lock"></i>,
+      text: "web site ayarları",
+    },
+    {
+      icon: <i className="fas fa-lock"></i>,
+      text: "hakkımızda ayarları",
+    },
+    {
+      icon: <i className="fas fa-lock"></i>,
+      text: "sıkça sorulan sorular ayarları",
+    },
+  ];
+
+  const tabsToMap = userData.role === 0 ? adminAccountTabs : accountTabs;
+
   return (
     <>
       <ToastContainer />
@@ -75,7 +111,7 @@ const AccountSection = () => {
               <div className="col-xl-3 col-lg-4">
                 <div className="account-sidebar search-sidebar">
                   <TabList className="nav side-tab flex-column nav-pills me-3">
-                    {accountTabs.map((accountTab, accountTabIndex) => {
+                    {tabsToMap.map((accountTab, accountTabIndex) => {
                       return (
                         <Tab className={"nav-link"} key={accountTabIndex}>
                           <span className="icon">{accountTab.icon}</span>
@@ -100,26 +136,49 @@ const AccountSection = () => {
                 </div>
               </div>
 
-              <div className="col-xl-9 col-lg-8">
-                <TabPanel>
-                  <AccountHomeTab />
-                </TabPanel>
-                <TabPanel>
-                  <AccountProfileTab />
-                </TabPanel>
-                <TabPanel>
-                  <AccountDetailsTab />
-                </TabPanel>
-                <TabPanel>
-                  <AccountMyPropertyTab />
-                </TabPanel>
-                <TabPanel>
-                  <AccountAddPropertyTab />
-                </TabPanel>
-                <TabPanel>
-                  <AccountChangePasswordTab />
-                </TabPanel>
-              </div>
+              {userData.role === 0 ? (
+                <div className="col-xl-9 col-lg-8">
+                  <TabPanel>
+                    <AccountHomeTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountProfileTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountChangePasswordTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <WebSiteSettingsTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AboutSettingsTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <FaqSettings />
+                  </TabPanel>
+                </div>
+              ) : (
+                <div className="col-xl-9 col-lg-8">
+                  <TabPanel>
+                    <AccountHomeTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountProfileTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountDetailsTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountMyPropertyTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountAddPropertyTab />
+                  </TabPanel>
+                  <TabPanel>
+                    <AccountChangePasswordTab />
+                  </TabPanel>
+                </div>
+              )}
             </div>
           </Tabs>
         </div>

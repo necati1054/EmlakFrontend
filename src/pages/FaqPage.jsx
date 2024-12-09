@@ -30,10 +30,10 @@ const FaqPage = () => {
         offCanvasBtnClass=""
         showContactNumber={false}
       />
-      <Breadcrumb
+      {/* <Breadcrumb
         pageTitle="Sıkça Sorulan Sorular"
         pageName="Sıkça Sorulan Sorular"
-      />
+      /> */}
 
       <FaqTwo />
 

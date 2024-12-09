@@ -7,57 +7,58 @@ import { türkiyeIlleri } from "../data/OthersPageData/OthersPageData";
 import { useTranslation } from "react-i18next";
 
 const konut_taşınmaz_türü = [
-  { id: 1, text: "daire" },
-  { id: 2, text: "rezidans" },
-  { id: 3, text: "müstakil_ev" },
-  { id: 4, text: "villa" },
-  { id: 5, text: "çiftlik_evi" },
-  { id: 6, text: "köşk_konak" },
-  { id: 7, text: "yalı" },
-  { id: 8, text: "yalı_dairesi" },
-  { id: 9, text: "yazlık" },
-  { id: 10, text: "kooperatif" },
+  { id: 1, text: "Daire" },
+  { id: 2, text: "Rezidans" },
+  { id: 3, text: "Müstakil Ev" },
+  { id: 4, text: "Villa" },
+  { id: 5, text: "Çiftlik Evi" },
+  { id: 6, text: "Köşk Konak" },
+  { id: 7, text: "Yalı" },
+  { id: 8, text: "Yalı Dairesi" },
+  { id: 9, text: "Yazlık" },
+  { id: 10, text: "Kooperatif" },
 ];
 
 const işyeri_taşınmaz_türü = [
-  { id: 1, text: "atölye" },
-  { id: 2, text: "avm" },
-  { id: 3, text: "büfe" },
-  { id: 4, text: "ofis" },
-  { id: 5, text: "kafe" },
-  { id: 6, text: "çiftlik" },
-  { id: 7, text: "depo" },
-  { id: 8, text: "dükkan" },
-  { id: 9, text: "kıraathane" },
-  { id: 10, text: "kumarhane" },
+  { id: 1, text: "Atölye" },
+  { id: 2, text: "AVM" },
+  { id: 3, text: "Büfe" },
+  { id: 4, text: "Ofis" },
+  { id: 5, text: "Kafe" },
+  { id: 6, text: "Çiftlik" },
+  { id: 7, text: "Depo" },
+  { id: 8, text: "Dükkan" },
+  { id: 9, text: "Kıraathane" },
+  { id: 10, text: "Kumarhane" },
 ];
 
 const arsa_taşınmaz_türü = [
-  { id: 1, text: "ada" },
-  { id: 2, text: "a-Lejantlı" },
-  { id: 3, text: "arazi" },
-  { id: 4, text: "bahçe" },
-  { id: 5, text: "depo" },
-  { id: 6, text: "eğitim" },
-  { id: 7, text: "enerji_depolama" },
-  { id: 8, text: "konut" },
-  { id: 9, text: "muhtelif" },
-  { id: 10, text: "özel_kullanım" },
-  { id: 11, text: "sağlık" },
-  { id: 12, text: "sanayi" },
-  { id: 13, text: "sera" },
-  { id: 14, text: "sit_alanı" },
-  { id: 15, text: "spor_alanı" },
-  { id: 16, text: "tarla" },
-  { id: 17, text: "ticari" },
-  { id: 18, text: "toplu_konut" },
-  { id: 19, text: "turizm" },
-  { id: 20, text: "villa" },
-  { id: 21, text: "zeytinlik" },
+  { id: 1, text: "Ada" },
+  { id: 2, text: "A-Lejantlı" },
+  { id: 3, text: "Arazi" },
+  { id: 4, text: "Bahçe" },
+  { id: 5, text: "Depo" },
+  { id: 6, text: "Eğitim" },
+  { id: 7, text: "Enerji Depolama" },
+  { id: 8, text: "Konut" },
+  { id: 9, text: "Muhtelif" },
+  { id: 10, text: "Özel Kullanım" },
+  { id: 11, text: "Sağlık" },
+  { id: 12, text: "Sanayi" },
+  { id: 13, text: "Sera" },
+  { id: 14, text: "Sit Alanı" },
+  { id: 15, text: "Spor Alanı" },
+  { id: 16, text: "Tarla" },
+  { id: 17, text: "Ticari" },
+  { id: 18, text: "Toplu Konut" },
+  { id: 19, text: "Turizm" },
+  { id: 20, text: "Villa" },
+  { id: 21, text: "Zeytinlik" },
 ];
 
 const Filter = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   const navigate = useNavigate();
 
   // Input Field Validation Start
@@ -69,12 +70,12 @@ const Filter = (props) => {
       il: "",
     },
     // Validate by Yup
-    validationSchema: yup.object({
-      ilan_basligi: yup
-        .string()
-        .min(3, t("Minimum 3 karakter girmelisiniz"))
-        .required(t("Arama kelimesi girmelisiniz")),
-    }),
+    // validationSchema: yup.object({
+    //   ilan_basligi: yup
+    //     .string()
+    //     .min(3, t("Minimum 3 karakter girmelisiniz"))
+    //     .required(t("Arama kelimesi girmelisiniz")),
+    // }),
 
     onSubmit: (values, { resetForm }) => {
       // alert(JSON.stringify(values, null, 2));
@@ -101,7 +102,9 @@ const Filter = (props) => {
 
       // console.log("/property/" + `${props.buttonText}` + "?" + queryString);
 
-      navigate("/property/" + `${props.buttonText}` + "?" + queryString);
+      navigate(
+        "/" + lang + "/property/" + `${props.buttonText}` + "?" + queryString
+      );
 
       // Navigate To Property Page
 
@@ -193,12 +196,7 @@ const Filter = (props) => {
                   id="il"
                 >
                   {türkiyeIlleri[0]?.map((il) => (
-                    <option
-                      value={il.value}
-                      key={il.value}
-                      disabled={il.value == "seç" ? true : false}
-                      defaultValue={il.value == "seç" ? true : false}
-                    >
+                    <option value={il.value} key={il.value}>
                       {il.text}
                     </option>
                   ))}

@@ -45,11 +45,12 @@ const PropertyItem = ({
     id,
   } = property;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
 
   // Details Slug
   const propertyURL = slugURL({
-    url: "property",
+    url: `${lang}/property`,
     id: property.id,
     ilanType: ilan_type,
   });

@@ -21,7 +21,10 @@ const HomeOne = () => {
     getData();
   }, []);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  let lang = i18n.resolvedLanguage;
+
   return (
     <>
       <PageTitle title={`CityScape - ${t("Ana Sayfa")}`} />
@@ -35,7 +38,7 @@ const HomeOne = () => {
           logoWhite={false}
           headerMenusClass=""
           btnClass="btn btn-outline-light d-lg-block d-none"
-          btnLink="/login"
+          btnLink={"/" + lang + "/login"}
           btnText={t("Giriş Yap")}
           spanClass="icon-right text-gradient"
           showHeaderBtn={true}

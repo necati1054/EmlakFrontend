@@ -8,7 +8,7 @@ const FooterBottom = (props) => {
         <div className="container container-two">
           <div className="bottom-footer__inner flx-between gap-3">
             <p className="bottom-footer__text">
-              &copy; Emlak {new Date().getFullYear()} |{" "}
+              &copy; cityspace {new Date().getFullYear()} |{" "}
               {t("Bütün hakları saklıdır.")}
             </p>
           </div>

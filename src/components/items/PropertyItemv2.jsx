@@ -44,10 +44,12 @@ const PropertyItem = ({
     asansör_sayisi,
     id,
   } = property;
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
 
   // Details Slug
   const propertyURL = slugURL({
-    url: "property",
+    url: `${lang}/property`,
     id: property.id,
     ilanType: ilan_type,
   });
@@ -89,8 +91,6 @@ const PropertyItem = ({
       currency: "TRY",
     });
   }
-
-  const { t } = useTranslation();
 
   return (
     <>

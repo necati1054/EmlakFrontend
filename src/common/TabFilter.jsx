@@ -6,19 +6,23 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const TabFilter = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   const filterTabs = [
     {
       id: 1,
       text: t("konut"),
+      text2: "konut",
     },
     {
       id: 2,
       text: t("isyeri"),
+      text2: "isyeri",
     },
     {
       id: 3,
       text: t("arsa"),
+      text2: "arsa",
     },
   ];
 
@@ -32,7 +36,7 @@ const TabFilter = (props) => {
             </Tab>
           ))}
           <Tab key={filterTabs.length} className={"nav-link"}>
-            <Link to="/map" style={{ color: "black" }}>
+            <Link to={"/" + lang + "/map"} style={{ color: "black" }}>
               {t("Harita İle Ara")}
             </Link>
           </Tab>
@@ -41,7 +45,7 @@ const TabFilter = (props) => {
           <TabPanel key={index}>
             <Filter
               colClass={props.colClass}
-              buttonText={filterTab.text}
+              buttonText={filterTab.text2}
               FilterTabId={filterTab.id}
             />
           </TabPanel>

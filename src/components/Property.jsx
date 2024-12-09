@@ -4,7 +4,8 @@ import PropertyItem from "./items/PropertyItem";
 import { useTranslation } from "react-i18next";
 
 const Property = ({ title, propertyData, ilan_type }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   return (
     <>
       {/* ============================ property Start ==================== */}
@@ -18,7 +19,7 @@ const Property = ({ title, propertyData, ilan_type }) => {
             renderDesc={false}
             desc=""
             renderButton={true}
-            buttonLink={`/property${
+            buttonLink={`/${lang}/property${
               ilan_type == 1 ? "/konut" : ilan_type == 2 ? "/isyeri" : "/arsa"
             }`}
             buttonClass="btn-main"
