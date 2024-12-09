@@ -20,24 +20,6 @@ const AboutSettingsTab = () => {
     }
   }, [navigate]);
 
-  const handleRedirectLogin = () => {
-    axios
-      .post("/logout")
-      .then((res) => {
-        console.log(res);
-        console.log("You Logged out Successfully");
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("user");
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("user");
-        navigate("/login");
-      });
-  };
-
   const getData = () => {
     axios
       .get("/settings")
@@ -74,7 +56,6 @@ const AboutSettingsTab = () => {
         })
         .then((res) => {
           console.log(res);
-          // handleRedirectLogin();
         })
         .catch((err) => {
           console.log(err);

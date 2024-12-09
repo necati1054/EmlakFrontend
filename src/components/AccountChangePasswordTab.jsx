@@ -6,7 +6,8 @@ import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 
 const AccountChangePasswordTab = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userData = JSON.parse(storedUser);
@@ -31,13 +32,13 @@ const AccountChangePasswordTab = () => {
         console.log("You Logged out Successfully");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       })
       .catch((err) => {
         console.log(err);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       });
   };
 

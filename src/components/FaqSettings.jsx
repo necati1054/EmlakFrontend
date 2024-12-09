@@ -57,23 +57,6 @@ const FaqSettings = () => {
     getData();
   }, []);
 
-  const handleRedirectLogin = () => {
-    axios
-      .post("/logout")
-      .then((res) => {
-        console.log(res);
-        console.log("You Logged out Successfully");
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("user");
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("user");
-        navigate("/login");
-      });
-  };
   const formik = useFormik({
     initialValues: {
       faq1id: 1,
@@ -142,7 +125,6 @@ const FaqSettings = () => {
         .post("/faq", { data: data })
         .then((res) => {
           console.log(res);
-          // handleRedirectLogin();
         })
         .catch((err) => {
           console.log(err);

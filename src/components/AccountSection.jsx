@@ -17,7 +17,8 @@ import axios from "../axios.js";
 import { useTranslation } from "react-i18next";
 
 const AccountSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userData = JSON.parse(storedUser);
@@ -35,13 +36,13 @@ const AccountSection = () => {
         console.log("You Logged out Successfully");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       })
       .catch((err) => {
         console.log(err);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       });
   };
 

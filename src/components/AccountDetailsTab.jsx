@@ -8,6 +8,7 @@ const AccountDetailsTab = () => {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userData = JSON.parse(storedUser);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (!storedUser) {
@@ -29,13 +30,13 @@ const AccountDetailsTab = () => {
         console.log("You Logged out Successfully");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       })
       .catch((err) => {
         console.log(err);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("user");
-        navigate("/login");
+        navigate("/login" + "/" + lang);
       });
   };
 
@@ -69,8 +70,6 @@ const AccountDetailsTab = () => {
       role: userData.role,
     });
   }, []);
-
-  const { t } = useTranslation();
 
   return (
     <>
