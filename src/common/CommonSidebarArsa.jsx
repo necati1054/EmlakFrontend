@@ -26,6 +26,12 @@ const CommonSidebar = ({ user, PropertiesData }) => {
   }
 
   const { t } = useTranslation();
+
+  const formatString = (inputString) => {
+    return inputString
+      .toLowerCase() // Tüm harfleri küçük harfe çevir
+      .replace(/_/g, " "); // Tüm "_" karakterlerini boşluk ile değiştir
+  };
   return (
     <>
       <div className="common-sidebar">
@@ -98,7 +104,11 @@ const CommonSidebar = ({ user, PropertiesData }) => {
                       {t("imar Durumu")}
                     </span>
                     <h6 className="amenities-content__title mb-0 font-16">
-                      {PropertiesData?.imar_durumu}
+                      {formatString(
+                        PropertiesData?.imar_durumu
+                          ? PropertiesData?.imar_durumu
+                          : ""
+                      )}
                     </h6>
                   </div>
                 </div>
@@ -204,7 +214,11 @@ const CommonSidebar = ({ user, PropertiesData }) => {
                       {t("Tapu Durumu")}
                     </span>
                     <h6 className="amenities-content__title mb-0 font-16">
-                      {PropertiesData?.tapu_durumu}
+                      {formatString(
+                        PropertiesData?.tapu_durumu
+                          ? PropertiesData?.tapu_durumu
+                          : ""
+                      )}
                     </h6>
                   </div>
                 </div>

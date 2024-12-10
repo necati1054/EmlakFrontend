@@ -46,13 +46,22 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.krediye_uygunluk == 1
+                                    ? "selected"
+                                    : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("krediye Uygunluk")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.krediye_uygunluk == 1
-                                ? "var"
-                                : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -60,11 +69,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.takaslı == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Takaslı")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.takaslı == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>

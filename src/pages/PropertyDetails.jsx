@@ -67,10 +67,6 @@ const PropertyDetails = () => {
       {ilanType === "arsa" && (
         <PropertyDetailsSecritonArsa PropertiesData={PropertiesData} />
       )}
-
-      {/* CTA */}
-
-      {/* Footer */}
       <Footer />
     </>
   );
