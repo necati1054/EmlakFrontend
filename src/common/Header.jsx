@@ -140,25 +140,6 @@ const Header = (props) => {
                 />
               )}
 
-              {/* Dil değiştirme dropdown */}
-              {/* <select
-                className="ms-3"
-                value={i18n.resolvedLanguage}
-                onChange={(e) => {
-                  chaneLanguage(e);
-                }}
-              >
-                {Object.keys(lngs).map((lng) => (
-                  <option
-                    value={lng}
-                    key={lng}
-                    disabled={i18n.resolvedLanguage == lng}
-                  >
-                    <img src={lngs[lng].flag} alt="" />
-                  </option>
-                ))}
-              </select> */}
-
               {/*  */}
               <div
                 className="dropdown-container"

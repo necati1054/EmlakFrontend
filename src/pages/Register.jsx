@@ -29,7 +29,7 @@ const Register = () => {
           showContactNumber={false}
         />
 
-        <Breadcrumb pageTitle="Kayıt Ol" pageName="Kayıt Ol" />
+        <Breadcrumb pageTitle={t("Kayıt Ol")} pageName={t("Kayıt Ol")} />
 
         <LoginRegister
           titleText={t("Kayıt Ol")}

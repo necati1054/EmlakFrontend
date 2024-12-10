@@ -47,11 +47,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.balkon == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Balkon")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.balkon == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -60,11 +69,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.asansör == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Asansör")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.asansör == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -72,11 +90,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.otopark == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Otopark")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.otopark == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -84,11 +111,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.eşyalı == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Eşyalı")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.eşyalı == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -96,13 +132,22 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.krediye_uygun == 1
+                                    ? "selected"
+                                    : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Krediye Uygun")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.krediye_uygun == 1
-                                ? "var"
-                                : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -110,11 +155,22 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.zemin_etüdü == 1
+                                    ? "selected"
+                                    : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Zemin Etüdü")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.zemin_etüdü == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>
@@ -122,11 +178,20 @@ const PropertyDetailsSection = ({ PropertiesData }) => {
                         <div className="amenities-content d-flex align-items-center">
                           <div className="amenities-content__inner">
                             <span className="amenities-content__text">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled="true"
+                                checked={
+                                  PropertiesData?.takaslı == 1 ? "selected" : ""
+                                }
+                                style={{
+                                  color: "black",
+                                  backgroundColor: "black",
+                                }}
+                              />{" "}
                               {t("Takaslı")}
                             </span>
-                            <h6 className="amenities-content__title mb-0 font-16">
-                              {PropertiesData?.takaslı == 1 ? "var" : "yok"}
-                            </h6>
                           </div>
                         </div>
                       </div>

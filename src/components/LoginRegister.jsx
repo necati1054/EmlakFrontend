@@ -134,7 +134,9 @@ const LoginRegister = ({
                       </h3>
                       <div className="row gy-lg-4 gy-3">
                         <div className={firstNameCol}>
-                          <label htmlFor="name" className="form-label"></label>
+                          <label htmlFor="name" className="form-label">
+                            {t("İsim")}
+                          </label>
                           <input
                             type="text"
                             placeholder={t("İsim")}
