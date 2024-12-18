@@ -6,7 +6,13 @@ const containerStyle = {
   height: "400px",
 };
 
-function MyComponent({ center, setCenter, markerPosition, setMarkerPosition }) {
+function MyComponent({
+  center,
+  setCenter,
+  markerPosition,
+  setMarkerPosition,
+  editIlanData,
+}) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCZ2lv_291yFguiqfick2M6d_jatFdjFNs", // Google API anahtarınızı buraya ekleyin
   });
@@ -27,8 +33,19 @@ function MyComponent({ center, setCenter, markerPosition, setMarkerPosition }) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude });
-          setMarkerPosition({ lat: latitude, lng: longitude });
+          if (Object.keys(editIlanData).length != 0) {
+            setCenter({
+              lat: parseFloat(editIlanData.lat),
+              lng: parseFloat(editIlanData.lng),
+            });
+            setMarkerPosition({
+              lat: parseFloat(editIlanData.lat),
+              lng: parseFloat(editIlanData.lng),
+            });
+          } else {
+            setCenter({ lat: latitude, lng: longitude });
+            setMarkerPosition({ lat: latitude, lng: longitude });
+          }
         },
         () => {
           console.warn(

@@ -3,6 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios.js";
 import Config from "../urlConf.js";
 import { useTranslation } from "react-i18next";
+import KonutListingForm from "./KonutListingForm.jsx";
+import Modal from "react-modal";
+import ArsaListingForm from "./ArsaListingForm.jsx";
+import IsYeriListingForm from "./IsYeriListingForm.jsx";
+
+// Modal'ın kök elemanını tanımla
+Modal.setAppElement("#root");
 
 const AccountMyPropertyTab = () => {
   const navigate = useNavigate();
@@ -11,6 +18,8 @@ const AccountMyPropertyTab = () => {
   const [data, setData] = useState([]);
   const [state, setState] = useState(null);
   let control = false;
+  const [isOpen, setIsOpen] = useState(false);
+  const [editIlanData, seteditIlanData] = useState(0);
 
   const { t } = useTranslation();
 
@@ -111,7 +120,6 @@ const AccountMyPropertyTab = () => {
     }
     return propertyTables.map((propertyTable, propertyTableIndex) => (
       <>
-        {console.log(propertyTable?.ilanable?.photos[0]?.path)}
         <tr key={propertyTableIndex}>
           <td>
             <div className="d-flex align-items-center gap-3">
@@ -156,6 +164,10 @@ const AccountMyPropertyTab = () => {
           <td>
             <button
               type="button"
+              onClick={() => {
+                seteditIlanData(propertyTable?.ilanable);
+                setIsOpen(true);
+              }}
               className="rounded-btn edit-btn text-info bg-info m-auto bg-opacity-10 flex-shrink-0"
             >
               <i className="fas fa-edit"></i>
@@ -170,7 +182,7 @@ const AccountMyPropertyTab = () => {
                 }}
                 className="rounded-btn edit-btn text-danger bg-info m-auto bg-opacity-10 flex-shrink-0"
               >
-                <i class="fas fa-times"></i>
+                <i className="fas fa-times"></i>
               </button>
             ) : (
               <button
@@ -205,6 +217,7 @@ const AccountMyPropertyTab = () => {
       </>
     ));
   };
+
   return (
     <>
       <div className="row" style={{ marginBottom: "10px" }}>
@@ -275,6 +288,34 @@ const AccountMyPropertyTab = () => {
         </>
       )}
       {/* <Pagination /> */}
+
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={() => setIsOpen(false)}
+        contentLabel="Güncelleme Modal"
+        style={{
+          overlay: {
+            zIndex: 1000, // Arka planın z-index değeri
+            backgroundColor: "rgba(0, 0, 0, 0.75)", // Arkaplan rengi
+          },
+        }}
+      >
+        <div className="row">
+          <button
+            style={{ display: "flex", justifyContent: "right" }}
+            onClick={() => setIsOpen(false)}
+          >
+            Kapat
+          </button>
+        </div>
+        {state == 1 ? (
+          <KonutListingForm editIlanData={editIlanData} />
+        ) : state == 2 ? (
+          <ArsaListingForm editIlanData={editIlanData} />
+        ) : (
+          <IsYeriListingForm editIlanData={editIlanData} />
+        )}
+      </Modal>
     </>
   );
 };

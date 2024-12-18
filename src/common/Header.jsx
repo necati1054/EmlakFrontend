@@ -17,6 +17,7 @@ import by_flag from "/assets/images/flag/russian.png";
 import it_flag from "/assets/images/flag/italian.png";
 
 import "../../public/assets/css/dropdown.css";
+import { ToastContainer } from "react-toastify";
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -186,6 +187,7 @@ const Header = (props) => {
           </nav>
         </div>
       </header>
+      <ToastContainer />
       {/* ==================== Header End Here ==================== */}
     </>
   );

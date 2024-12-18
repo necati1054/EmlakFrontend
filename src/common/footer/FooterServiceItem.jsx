@@ -3,27 +3,29 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const FooterServiceItem = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  let lang = i18n.resolvedLanguage;
+
   const footerServiceLinks = [
     {
       text: t("Hakkımızda"),
-      link: "/about-us",
+      link: `/${lang}/about-us`,
     },
     {
       text: t("İletişim"),
-      link: "/Contact",
+      link: `/${lang}/Contact`,
     },
     {
       text: t("Sıkça Sorulan Sorular"),
-      link: "/faq",
+      link: `/${lang}/faq`,
     },
     {
       text: t("Kullanıcı Sözleşmesi"),
-      link: "/property",
+      link: `/${lang}/about-us`,
     },
     {
       text: t("Gizlilik Politikası"),
-      link: "/property",
+      link: `/${lang}/about-us`,
     },
   ];
   return (

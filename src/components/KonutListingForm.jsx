@@ -4,13 +4,14 @@ import { useFormik } from "formik";
 import MyComponent from "./GoogleMaps";
 import axios from "../axios.js";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const defaultCenter = {
   lat: 39.9334, // Başlangıç enlem (Eğer izin verilmezse kullanılacak)
   lng: 32.8597, // Başlangıç boylam (Eğer izin verilmezse kullanılacak)
 };
 
-const KonutListingForm = () => {
+const KonutListingForm = ({ editIlanData = {} }) => {
   const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -19,7 +20,7 @@ const KonutListingForm = () => {
   const [markerPosition, setMarkerPosition] = useState(defaultCenter); // İşaretçinin konumu
 
   const handleProvinceChange = async (event) => {
-    const selectedIl = event.target.value;
+    const selectedIl = event?.target?.value ? event?.target?.value : event;
     setSelectedProvince(selectedIl);
 
     if (selectedIl != "seç") {
@@ -132,16 +133,43 @@ const KonutListingForm = () => {
         formData.append("images[]", image);
       });
 
-      axios
-        .post("/konut", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (Object.keys(editIlanData).length == 0) {
+        axios
+          .post("/konut", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((res) => {
+            console.log(res);
+            formik.resetForm();
+            toast.success("İlan Başarıyla Eklendi.", {
+              theme: "colored",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("İlan Eklenirken Bir Sorun Oluştu.", {
+              theme: "colored",
+            });
+          });
+      } else {
+        axios
+          .post(`/konut/${editIlanData.id}`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((res) => {
+            console.log(res);
+            formik.resetForm();
+            toast.success("İlan Başarıyla Güncellendi.", {
+              theme: "colored",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("İlan Güncellenirken Bir Sorun Oluştu.", {
+              theme: "colored",
+            });
+          });
+      }
     },
   });
 
@@ -153,6 +181,53 @@ const KonutListingForm = () => {
     });
     console.log("markerPosition", markerPosition);
   }, [markerPosition]);
+
+  useEffect(() => {
+    if (Object.keys(editIlanData).length != 0) {
+      formik.setValues({
+        ilan_basligi: editIlanData.ilan_basligi,
+        açıklama: editIlanData.açıklama,
+        teklif_tipi: editIlanData.teklif_tipi,
+        taşınmaz_türü: editIlanData.taşınmaz_türü,
+        fiyat: editIlanData.fiyat,
+        m2_brüt: editIlanData.m2_brüt,
+        m2_net: editIlanData.m2_net,
+        açık_alan_m2: editIlanData.açık_alan_m2,
+        arazi_m2: editIlanData.arazi_m2,
+        oda_sayisi: editIlanData.oda_sayisi,
+        salon_sayisi: editIlanData.salon_sayisi,
+        bina_yaşı: editIlanData.bina_yaşı,
+        kat_sayisi: editIlanData.kat_sayisi,
+        bulunduğu_kat: editIlanData.bulunduğu_kat,
+        ısıtma: editIlanData.ısıtma,
+        yapı_tipi: editIlanData.yapı_tipi,
+        banyo_sayisi: editIlanData.banyo_sayisi,
+        yapının_durumu: editIlanData.yapının_durumu,
+        kullanım_durumu: editIlanData.kullanım_durumu,
+        aidat: editIlanData.aidat,
+        tapu_durumu: editIlanData.tapu_durumu,
+        taşınmaz_numarası: editIlanData.taşınmaz_numarası,
+        İl: editIlanData.İl,
+        İlçe: editIlanData.İlçe,
+        Mahalle: editIlanData.Mahalle,
+        lat: editIlanData.lat,
+        lng: editIlanData.lng,
+        balkon: editIlanData.balkon == 1 ? true : false,
+        asansör: editIlanData.asansör == 1 ? true : false,
+        otopark: editIlanData.otopark == 1 ? true : false,
+        eşyalı: editIlanData.eşyalı == 1 ? true : false,
+        krediye_uygun: editIlanData.krediye_uygun == 1 ? true : false,
+        zemin_etüdü: editIlanData.zemin_etüdü == 1 ? true : false,
+        takaslı: editIlanData.takaslı == 1 ? true : false,
+      });
+
+      handleProvinceChange(editIlanData.İl);
+      setMarkerPosition({
+        lat: parseFloat(editIlanData.lat),
+        lng: parseFloat(editIlanData.lng),
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -635,6 +710,7 @@ const KonutListingForm = () => {
                         markerPosition={markerPosition}
                         setMarkerPosition={setMarkerPosition}
                         cityName={formik.values.İl}
+                        editIlanData={editIlanData}
                       />
                     </div>
                   </div>
@@ -644,61 +720,63 @@ const KonutListingForm = () => {
           </div>
         </div>
         {/* fotoğraf */}
-        <div className="card-item" id="propertyGallery">
-          <div className="card common-card">
-            <div className="card-header">
-              <h6 className="title mb-0">{t("Fotoğraflar")}</h6>
-            </div>
-            <div className="card-body">
-              <div className="image-uploader">
-                <label
-                  htmlFor="ImageUploadLabel"
-                  className="image-uploader__label"
-                >
-                  <span className="d-none">{t("Resim Yükle")}</span>
-                </label>
+        {Object.keys(editIlanData).length == 0 && (
+          <div className="card-item" id="propertyGallery">
+            <div className="card common-card">
+              <div className="card-header">
+                <h6 className="title mb-0">{t("Fotoğraflar")}</h6>
+              </div>
+              <div className="card-body">
+                <div className="image-uploader">
+                  <label
+                    htmlFor="ImageUploadLabel"
+                    className="image-uploader__label"
+                  >
+                    <span className="d-none">{t("Resim Yükle")}</span>
+                  </label>
 
-                <input
-                  type="file"
-                  name="images[]"
-                  className="image-uploader__input"
-                  id="ImageUploadLabel"
-                  multiple
-                  onChange={handleImageChange}
-                />
-                {images.length > 0 ? (
-                  <div className="uploaded-images d-flex flex-wrap gap-3">
-                    {images.map((image, index) => (
-                      <div className="uploaded-image" key={index}>
-                        <button
-                          type="button"
-                          className="uploaded-image__remove"
-                          onClick={() => handleRemoveImage(index)}
-                        >
-                          <i className="fas fa-times"></i>
-                        </button>
+                  <input
+                    type="file"
+                    name="images[]"
+                    className="image-uploader__input"
+                    id="ImageUploadLabel"
+                    multiple
+                    onChange={handleImageChange}
+                  />
+                  {images.length > 0 ? (
+                    <div className="uploaded-images d-flex flex-wrap gap-3">
+                      {images.map((image, index) => (
+                        <div className="uploaded-image" key={index}>
+                          <button
+                            type="button"
+                            className="uploaded-image__remove"
+                            onClick={() => handleRemoveImage(index)}
+                          >
+                            <i className="fas fa-times"></i>
+                          </button>
 
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt={`Image ${index}`}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="upload-text">
-                    <span className="upload-text__icon">
-                      <i className="fas fa-cloud-upload-alt"></i>
-                    </span>
-                    <span className="upload-text__text">
-                      {t("Fotoğraf Yüklemek İçin Tıklayınız")}
-                    </span>
-                  </div>
-                )}
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={`Image ${index}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="upload-text">
+                      <span className="upload-text__icon">
+                        <i className="fas fa-cloud-upload-alt"></i>
+                      </span>
+                      <span className="upload-text__text">
+                        {t("Fotoğraf Yüklemek İçin Tıklayınız")}
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
         {/* ek bilgiler */}
         <div className="card-item" id="propertyInformation">
           <div className="card common-card">
@@ -829,9 +907,15 @@ const KonutListingForm = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-main w-100">
-          {t("Kaydet")}
-        </button>
+        {Object.keys(editIlanData).length == 0 ? (
+          <button type="submit" className="btn btn-main w-100">
+            {t("Kaydet")}
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-main w-100">
+            Güncelle
+          </button>
+        )}
       </form>
     </>
   );
