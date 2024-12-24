@@ -135,9 +135,7 @@ const AccountMyPropertyTab = () => {
               </div>
               <div className="cart-item__content">
                 <h6 className="cart-item__title fw-500 font-18">
-                  <Link to="/property" className="link">
-                    {propertyTable.ilanable.ilan_basligi}
-                  </Link>
+                  {propertyTable.ilanable.ilan_basligi}
                 </h6>
                 <p className="property-item__location d-flex gap-2 font-14">
                   <span className="icon text-gradient">

@@ -141,6 +141,8 @@ const KonutListingForm = ({ editIlanData = {} }) => {
           .then((res) => {
             console.log(res);
             formik.resetForm();
+            setImages([]);
+            setMarkerPosition(defaultCenter);
             toast.success("İlan Başarıyla Eklendi.", {
               theme: "colored",
             });
@@ -159,6 +161,8 @@ const KonutListingForm = ({ editIlanData = {} }) => {
           .then((res) => {
             console.log(res);
             formik.resetForm();
+            setImages([]);
+            setMarkerPosition(defaultCenter);
             toast.success("İlan Başarıyla Güncellendi.", {
               theme: "colored",
             });
