@@ -28,7 +28,7 @@ const HouseLocationMap = ({ lat, lng }) => {
 
     // Load Google Maps API
     loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=?????`,
+      ``,
       initMap
     );
   }, [lat, lng]); // Run effect when lat or lng changes
