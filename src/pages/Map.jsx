@@ -19,7 +19,7 @@ import {
 } from "@react-google-maps/api";
 
 const Map = () => {
-  const API_KEY = "AIzaSyCZ2lv_291yFguiqfick2M6d_jatFdjFNs";
+  const API_KEY = "";
   const { t, i18n } = useTranslation();
   let lang = i18n.resolvedLanguage;
 
