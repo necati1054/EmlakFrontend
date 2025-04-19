@@ -14,7 +14,7 @@ function MyComponent({
   editIlanData,
 }) {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCZ2lv_291yFguiqfick2M6d_jatFdjFNs", // Google API anahtarınızı buraya ekleyin
+    googleMapsApiKey: "", // Google API anahtarınızı buraya ekleyin
   });
 
   const mapRef = useRef(null);
